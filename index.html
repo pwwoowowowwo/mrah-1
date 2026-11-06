@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مَراح | إدارة الحلال</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef2ea;--surf:#fff;--ink:#14241a;--mut:#5d6f62;--line:#dbe3d6;--pri:#1f5a35;--onpri:#fff;--gold:#c98a12;--dng:#c4442e;--soft:#e3ebde;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1810;--surf:#15261b;--ink:#eaf0e6;--mut:#94a898;--line:#234030;--pri:#5fbf84;--onpri:#0d1810;--gold:#efb94a;--dng:#ef7a62;--soft:#1b3324}}
+:root[data-theme="dark"]{--bg:#0d1810;--surf:#15261b;--ink:#eaf0e6;--mut:#94a898;--line:#234030;--pri:#5fbf84;--onpri:#0d1810;--gold:#efb94a;--dng:#ef7a62;--soft:#1b3324}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.6 Tajawal,Tahoma,sans-serif;min-height:100vh}
+h1,h2,h3,.num{font-family:'Reem Kufi',Tajawal,Tahoma,sans-serif}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#splash{position:fixed;inset:0;z-index:900;background:#10301c;color:#f3efe0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;transition:opacity .7s,visibility .7s}
+#splash.off{opacity:0;visibility:hidden}
+#splash .logo{font-size:64px;width:120px;height:120px;border-radius:50%;background:#e9b44c;display:grid;place-items:center;animation:pop .9s cubic-bezier(.2,1.4,.4,1)}
+#splash h1{font-size:3rem;font-weight:700;letter-spacing:0}
+#splash p{opacity:.8;max-width:30ch}
+#splash button{margin-top:10px;background:#e9b44c;color:#10301c;font-weight:700;padding:13px 38px;border-radius:99px;font-size:1.1rem}
+@keyframes pop{from{transform:scale(.3) rotate(-20deg);opacity:0}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font:700 1.5rem 'Reem Kufi',Tajawal,sans-serif}
+.brand i{font-style:normal;width:38px;height:38px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:20px}
+.ib{width:40px;height:40px;border-radius:50%;background:var(--soft);font-size:18px}
+nav{position:fixed;bottom:0;inset-inline:0;z-index:60;display:flex;background:var(--surf);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav{overflow-x:auto}nav button{flex:1 0 54px;padding:9px 2px 7px;font-size:.72rem;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:1px}
+nav button b{font-size:1.3rem;font-weight:400}
+nav button.on{color:var(--pri);font-weight:700}
+nav button.on b{transform:translateY(-2px)}
+main{max-width:980px;margin:0 auto;padding:18px 16px 100px}
+.hero{background:var(--pri);color:var(--onpri);border-radius:26px;padding:22px;display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:center;margin-bottom:16px}
+.hero h2{font-size:1.5rem;line-height:1.3}
+.hero p{opacity:.85;font-size:.95rem;margin-top:4px}
+.hero .big{font:700 3.6rem/1 'Reem Kufi',sans-serif;margin-top:10px}
+.hero svg{width:150px;height:150px;transform:rotate(-90deg)}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.legend button{background:rgba(255,255,255,.16);border-radius:99px;padding:3px 11px;font-size:.8rem;display:flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:14px 16px;text-align:start;transition:transform .2s,border-color .2s}
+.kpi:hover{transform:translateY(-3px);border-color:var(--pri)}
+.kpi small{color:var(--mut);display:block}
+.kpi .num{font-size:2rem;font-weight:700}
+.kpi.bad .num{color:var(--dng)}
+.kpi.gold .num{color:var(--gold)}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.card h3{font-size:1.15rem;margin-bottom:10px}
+.alert{display:flex;gap:10px;align-items:center;padding:11px 14px;border-radius:14px;margin-bottom:8px;background:var(--soft);border-inline-start:5px solid var(--gold)}
+.alert.red{border-color:var(--dng)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.bar{height:9px;background:var(--soft);border-radius:9px;overflow:hidden;margin-top:6px}
+.bar span{display:block;height:100%;background:var(--pri);border-radius:9px;transition:width 1s}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--soft);font-size:.8rem}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;width:100%}
+.toolbar input{flex:2 1 160px}.toolbar select{flex:1 1 120px}
+.btn{background:var(--pri);color:var(--onpri);font-weight:700;border-radius:12px;padding:10px 18px}
+.btn.wa{background:#1fa855;color:#fff}
+.mini{padding:5px 9px;border-radius:9px;background:var(--soft);font-size:.9rem}
+.mini.d{color:var(--dng)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:480px}
+th{color:var(--mut);font-weight:500;font-size:.85rem;text-align:start;padding:8px;border-bottom:2px solid var(--line)}
+td{padding:9px 8px;border-bottom:1px solid var(--line)}
+td:last-child{white-space:nowrap}
+.empty{text-align:center;color:var(--mut);padding:22px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:130px;margin-top:8px}
+.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.75rem;color:var(--mut)}
+.bars i{display:block;width:100%;max-width:46px;background:var(--pri);border-radius:8px 8px 0 0;min-height:3px;transition:height .8s}
+#modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center}
+#modal.on{display:flex}
+.sheet{background:var(--surf);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:26px 26px 0 0;padding:20px;animation:up .28s ease-out}
+@media(min-width:600px){#modal{align-items:center}.sheet{border-radius:26px}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet h3{margin-bottom:12px;font-size:1.3rem}
+.sheet label{display:block;margin-bottom:10px;font-weight:500}
+.sheet label input,.sheet label select{margin-top:4px}
+.sheet .btn{width:100%;margin-top:6px}
+#toast{position:fixed;bottom:84px;left:50%;transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:99px;opacity:0;transition:.3s;z-index:500;pointer-events:none}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.idc{background:#f6fbfa;color:#0b2a2a;border-radius:22px;overflow:hidden;border:1px solid #bfe0dc;box-shadow:0 10px 30px rgba(14,143,138,.25);margin-bottom:12px}
+.idh{background:linear-gradient(120deg,#0b6e6a,#14b5ab);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.idh b{font:700 1.05rem 'Reem Kufi',sans-serif}.idh small{opacity:.85;display:block;font-size:.72rem}
+.cross{width:34px;height:34px;border-radius:9px;background:#fff;display:grid;place-items:center;color:#d6342a;font-weight:700;font-size:1.4rem}
+.idb{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px}
+.ph{width:96px;height:120px;border-radius:12px;background:#dff0ee center/cover;display:grid;place-items:center;font-size:40px;border:2px solid #14b5ab;cursor:pointer}
+.idb h2{font-size:1.9rem;letter-spacing:1px;line-height:1.1}.idb p{font-size:.85rem;color:#3d6462}
+.st{display:inline-flex;align-items:center;gap:7px;padding:3px 12px;border-radius:99px;font-weight:700;font-size:.85rem;margin-top:6px}
+.st i{width:9px;height:9px;border-radius:50%;animation:pl 1.4s infinite}
+.st.ok{background:#d9f5e4;color:#0c7a3e}.st.ok i{background:#16a34a}.st.warn{background:#fdf0c9;color:#8a5a00}.st.warn i{background:#e0a100}.st.bad{background:#fde0db;color:#a5281a}.st.bad i{background:#dc2f1f}
+@keyframes pl{50%{transform:scale(1.8);opacity:.4}}
+.ecg{display:block;width:100%;height:46px;background:#eaf6f5}.ecg path{stroke-dasharray:400;animation:ec 2.6s linear infinite}
+@keyframes ec{from{stroke-dashoffset:400}to{stroke-dashoffset:-400}}
+.vit{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#cfe6e3;border-top:1px solid #cfe6e3}
+.vit div{background:#f6fbfa;padding:10px 12px;font-size:.72rem;color:#4b7370}.vit b{display:block;font-size:.95rem;color:#0b2a2a}
+.idf{padding:10px 16px 14px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;font-size:.75rem;color:#4b7370}.idf svg{height:44px;width:auto}
+@media print{header,nav,main,#toast,#splash,#fab,.noprint{display:none!important}#modal{position:static;background:none;display:block}.sheet{max-height:none;animation:none;padding:0;background:#fff;color:#000}body{background:#fff}}
+@media(min-width:820px){
+nav{inset:0 0 0 auto;width:150px;flex-direction:column;border-top:0;border-inline-start:1px solid var(--line);padding-top:72px;justify-content:flex-start;gap:4px}
+nav button{flex:0;flex-direction:row;gap:10px;font-size:.95rem;padding:12px 18px;justify-content:flex-start}
+main{margin-inline:auto 170px;padding-bottom:40px}
+header{padding-inline-end:170px}
+#toast{bottom:30px}}
+@media(max-width:480px){.hero{grid-template-columns:1fr}.hero svg{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#fab{position:fixed;left:16px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:70;width:60px;height:60px;border-radius:50%;background:var(--gold);color:#1a1200;font-size:2.2rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+#toast.u{pointer-events:auto}
+.toolbar .btn{flex:1 1 110px}
+.qg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.qg button{background:var(--soft);border-radius:16px;padding:16px 8px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px}.qg b{font-size:1.9rem;font-weight:400}
+.seg{display:flex;gap:6px;background:var(--soft);padding:5px;border-radius:14px;margin-bottom:14px}.seg button{flex:1;padding:10px 4px;border-radius:10px;font-weight:500}.seg button.on{background:var(--pri);color:var(--onpri);font-weight:700}
+.task{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:14px;border-radius:14px;background:var(--soft);margin-bottom:8px;font-weight:500;font-size:1.05rem}.task b{font-size:1.5rem;font-weight:400}.task span{flex:1}.task.bad{background:var(--dng);color:#fff}
+.hr{width:100%;text-align:start;gap:12px;padding:13px 4px}
+@media(min-width:820px){#fab{bottom:24px;left:24px}}
+</style>
+</head>
+<body>
+<div id="splash"><div class="logo">🐑</div><h1>مَراح</h1><p>كل رأس في مراحك تعرف مكانه وحالته وموعد ولادته.</p><button id="go">ادخل المراح</button></div>
+<header><div class="brand"><i>🐑</i>مَراح</div><button class="ib" id="theme" aria-label="تبديل الوضع">🌓</button></header>
+<main id="view"></main>
+<nav id="nav"></nav>
+<button id="fab" data-a="fab" aria-label="عملية سريعة">+</button>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),K='marah_v2',PENS=['شبك الولاد والدفيع','شبك الفحول','شبك التسمين والبيع','شبك الطلي'],COL=['#3f9d62','#e9b44c','#4aa3c7','#d9694a','#9a8be0'];
+const T=()=>new Date().toISOString().slice(0,10),add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)},dl=d=>Math.ceil((new Date(d)-new Date(T()))/864e5),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fm=n=>Number(n).toLocaleString('en');
+const seed=()=>({sheep:[['N-101','نعيمي','أنثى',0,'دفيع مؤكد'],['N-102','نعيمي','أنثى',0,'دفيع مؤكد'],['N-103','نعيمي','أنثى',0,'دفيع مؤكد'],['H-201','حري','ذكر',1,'فحل ضارب'],['T-301','نعيمي','ذكر',2,'جاهز للبيع'],['T-302','نجدي','ذكر',2,'تسمين'],['W-401','نعيمي','أنثى',3,'طلي نامي']].map(a=>({id:uid(),tag:a[0],type:a[1],gender:a[2],pen:PENS[a[3]],status:a[4]})),
+breed:[['N-101',-100],['N-102',-40],['N-103',-140]].map(a=>({id:uid(),tag:a[0],sire:'H-201',date:add(T(),a[1]),due:add(T(),a[1]+150)})),
+weights:[['T-301',38,-30],['T-301',44,-1],['T-302',36,-30],['T-302',41,-1]].map(a=>({id:uid(),tag:a[0],kg:a[1],date:add(T(),a[2])})),
+dead:[{id:uid(),tag:'M-99',reason:'التهاب رئوي',date:add(T(),-20)}],
+fin:[{id:uid(),type:'sale',desc:'بيع طلي نعيمي',amount:1400,date:add(T(),-10)},{id:uid(),type:'expense',desc:'شراء شعير',amount:500,date:add(T(),-8)}]});
+let D;try{D=JSON.parse(localStorage.getItem(K))}catch(e){}D=D||seed();D.vax=D.vax||[];D.feed=D.feed||[];D.hist=D.hist||[];
+if(!D.m3){D.m3=1;const w=D.sheep.find(x=>x.tag=='W-401'&&!x.since);if(w)w.since=add(T(),-260)}
+if(!D.m2){D.m2=1;if(!D.vax.length&&!D.feed.length){D.sheep.forEach((s,i)=>D.vax.push({id:uid(),tag:s.tag,name:'الحمى القلاعية',date:add(T(),-170-i*5),next:i==2?add(T(),-5):add(T(),30+i*20)}));D.feed=[{id:uid(),pen:PENS[2],item:'شعير',kg:200,cost:500,date:add(T(),-8)},{id:uid(),pen:PENS[0],item:'برسيم',kg:150,cost:300,date:add(T(),-3)}]}}
+let saved=true;const save=()=>{try{localStorage.setItem(K,JSON.stringify(D));localStorage.setItem(K+'_t',Date.now());saved=true}catch(e){saved=false;toast('⚠️ تعذر الحفظ على الجهاز، صدّر نسخة إكسل')}push()};addEventListener('pagehide',()=>save());
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on'),2200)};
+const openM=h=>{$('#sheet').innerHTML=h;$('#modal').classList.add('on')},closeM=()=>$('#modal').classList.remove('on');
+$('#modal').onclick=e=>{if(e.target.id=='modal')closeM()};
+function form(title,fields,ok){openM(`<h3>${title}</h3><form id="fm">${fields.map(f=>`<label>${f[1]}${f[2]=='select'?`<select name="${f[0]}">${f[3].map(o=>`<option>${esc(o)}</option>`).join('')}</select>`:`<input name="${f[0]}" type="${f[2]}" step="any" value="${esc(f[3]||'')}" ${f[4]=='o'?'':'required'}>`}</label>`).join('')}<button class="btn">حفظ</button></form>`);
+$('#fm').onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));snap=JSON.stringify(D);closeM();ok(d)}}
+const tbl=(rows,cols,heads)=>rows.length?`<div class="scroll"><table><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${esc(r[c]??'-')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'<p class="empty">ما فيه بيانات هنا للحين.</p>';
+const sum=t=>D.fin.filter(f=>f.type==t).reduce((s,f)=>s+Number(f.amount),0);
+const stats=()=>{const al=D.sheep.length,dd=D.dead.length;return{al,dd,pg:D.sheep.filter(x=>x.status.includes('دفيع')).length,rate:al+dd?(dd/(al+dd)*100).toFixed(1):'0.0',sales:sum('sale'),exp:sum('expense')}};
+const males=()=>D.sheep.filter(s=>s.gender=='ذكر').map(s=>s.tag),females=()=>D.sheep.filter(s=>s.gender=='أنثى').map(s=>s.tag),tags=()=>D.sheep.map(s=>s.tag);
+const V={};
+const lst=(a,t)=>a.filter(x=>x.tag==t).sort((x,y)=>x.date>y.date?1:-1);
+const due=t=>{const m={};D.vax.filter(x=>x.tag==t).forEach(x=>{if(!m[x.name]||x.date>m[x.name].date)m[x.name]=x});return Object.values(m)};
+const hs=s=>{const v=due(s.tag).map(x=>dl(x.next));if(!v.length)return{c:'warn',t:'لا يوجد تطعيم مسجل'};const m=Math.min(...v);return m<0?{c:'bad',t:'تطعيم متأخر'}:m<=14?{c:'warn',t:'تطعيم قريب'}:{c:'ok',t:'سليم، التطعيمات سارية'}};
+const feedPer=p=>D.feed.filter(f=>f.pen==p).reduce((a,f)=>a+Number(f.cost),0)/(D.sheep.filter(s=>s.pen==p).length||1);
+const idCard=id=>{const s=D.sheep.find(x=>x.id==id),h=hs(s),w=lst(D.weights,s.tag),lw=w.at(-1),pw=w.at(-2),nx=due(s.tag).sort((a,b)=>a.next>b.next?1:-1)[0],lv=lst(D.vax,s.tag).at(-1),br=D.breed.find(b=>b.tag==s.tag),kids=D.sheep.filter(k=>k.dam==s.tag).length,cost=(+s.buy||0)+feedPer(s.pen);
+return `<div class="idc"><div class="idh"><div><b>بطاقة صحية بيطرية</b><small>مراح | المرجع ${esc(s.id.toUpperCase())}</small></div><div class="cross">+</div></div><div class="idb"><div class="ph" data-a="photo" data-v="${s.id}" style="${s.photo?`background-image:url(${s.photo})`:''}">${s.photo?'':'🐑'}</div><div><p>رقم الرأس</p><h2 class="num">${esc(s.tag)}</h2><p>${esc(s.type)} | ${s.gender=='ذكر'?'ذكر ♂':'أنثى ♀'}</p><p>${esc(s.pen)}</p><span class="st ${h.c}"><i></i>${h.t}</span></div></div><svg class="ecg" viewBox="0 0 400 46" preserveAspectRatio="none"><path d="M0 24H120l8-4 8 4h20l6-18 8 36 8-18h30l8-5 8 5H400" fill="none" stroke="#14b5ab" stroke-width="2"/></svg><div class="vit"><div>آخر وزن<b>${lw?lw.kg+' كجم':'-'}</b>${pw&&lw?(lw.kg>=pw.kg?'▲ ':'▼ ')+Math.abs(lw.kg-pw.kg)+' كجم':''}</div><div>آخر تطعيم<b>${lv?esc(lv.name):'-'}</b>${lv?lv.date:''}</div><div>الجرعة القادمة<b>${nx?nx.next:'-'}</b>${nx?(dl(nx.next)<0?'متأخرة':'بعد '+dl(nx.next)+' يوم'):''}</div><div>الحالة التناسلية<b>${esc(s.status)}</b>${br?'ولادة '+br.due:''}</div><div>النسب<b>${esc(s.dam||'-')} × ${esc(s.sire||'-')}</b>الأم × الأب</div><div>الأبناء | التكلفة<b>${kids} | ${fm(Math.round(cost))}</b>ر.س تقديرية</div><div>الضرابات<b>${s.tries||0}${s.tries>=4?' ⚠️':''}</b>${(D.hist.filter(h=>h.tag==s.tag).at(-1)||{}).gap?'آخر فترة '+D.hist.filter(h=>h.tag==s.tag).at(-1).gap+' يوم':'-'}</div><div>في المراح<b>${s.since?Math.floor(mo(s.since))+' شهر':'غير محدد'}</b>${s.since||''}</div><div>الإنتاجية<b style="color:${probs(s).length?'#a5281a':'#0c7a3e'}">${probs(s).length?'غير منتجة':'جيدة'}</b>${probs(s).length?esc(probs(s)[0][1]):'-'}</div></div><div class="idf"><div>صدرت بتاريخ ${T()}</div>${bars(s.tag)}</div></div><div class="toolbar noprint"><button class="btn wa" data-a="wa" data-v="${s.id}">📱 واتساب</button><button class="btn" data-a="pid" data-v="${s.id}">🖨 طباعة</button><button class="btn" data-a="addV" data-v="${esc(s.tag)}">💉 تطعيم</button><button class="btn" data-a="addW" data-v="${esc(s.tag)}">⚖️ وزن</button><button class="btn" data-a="sell" data-v="${s.id}">💰 بيع</button><button class="btn" data-a="die" data-v="${s.id}">☠️ نفوق</button><button class="btn" data-a="delS" data-v="${s.id}">🗑 حذف</button><button class="btn" data-a="edS" data-v="${s.id}">✏️ تعديل</button></div>`};
+V.dash=()=>{const s=stats(),pens={};D.sheep.forEach(x=>pens[x.pen]=(pens[x.pen]||0)+1);const pe=Object.entries(pens);let off=0;
+const arcs=pe.map((p,i)=>{const pc=p[1]/s.al*100,r=`<circle r="15.9" cx="18" cy="18" fill="none" stroke="${COL[i%5]}" stroke-width="4.5" stroke-dasharray="${Math.max(pc-1,.5)} ${101-pc}" stroke-dashoffset="${-off}"/>`;off+=pc;return r}).join('');
+const up=D.breed.filter(b=>(b.res||'حامل')=='حامل').map(b=>({...b,d:dl(b.due)})).sort((a,b)=>a.d-b.d),near=up.filter(b=>b.d<=14&&b.d>=-5);
+const h=new Date().getHours(),g=h<12?'صباح الخير':h<18?'مساء الخير':'مساء النور';
+return `<div class="hero"><div><h2>${g}، هذا حال المراح اليوم</h2><p>إجمالي الحلال الحي</p><div class="big num" data-n="${s.al}">0</div><div class="legend">${pe.map((p,i)=>`<button data-a="pen" data-v="${esc(p[0])}"><i style="background:${COL[i%5]}"></i>${esc(p[0].replace('شبك ',''))} ${p[1]}</button>`).join('')}</div></div><svg viewBox="0 0 36 36" role="img" aria-label="توزيع الحلال على الأشباك"><circle r="15.9" cx="18" cy="18" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4.5"/>${arcs}</svg></div>
+${taskCard()}
+${+s.rate>3?`<div class="alert red">⚠️<span>نسبة الهلاك ${s.rate}%، أعلى من الحد المقبول 3%. افحص التهوية والتطعيمات.</span></div>`:''}
+<div class="kpis"><button class="kpi" data-a="k" data-v="alive"><small>الأحياء</small><div class="num">${s.al}</div></button><button class="kpi" data-a="k" data-v="preg"><small>الدفيع والمقربة</small><div class="num">${s.pg}</div></button><button class="kpi bad" data-a="k" data-v="dead"><small>النفوق</small><div class="num">${s.dd}</div></button><button class="kpi bad" data-a="k" data-v="rate"><small>نسبة الهلاك</small><div class="num">${s.rate}%</div></button><button class="kpi gold" data-a="k" data-v="fin"><small>صافي الربح</small><div class="num">${fm(s.sales-s.exp)}</div></button></div>
+<div class="card"><h3>الولادات القادمة</h3>${up.length?up.slice(0,4).map(b=>`<div class="row"><div style="flex:1"><b>${esc(b.tag)}</b> <span class="tag">${b.d>0?'بعد '+b.d+' يوم':'حان موعدها'}</span><div class="bar"><span style="width:${Math.min(100,Math.max(3,(150-b.d)/1.5))}%"></span></div></div><small>${b.due}</small></div>`).join(''):'<p class="empty">ما فيه حمل مسجل. سجّل ضراب من تبويب الضراب.</p>'}</div>`};
+V.herd=()=>`<div class="toolbar"><input id="q" placeholder="ابحث برقم الرأس أو السلالة"><select id="pf"><option value="">كل الأشباك</option>${PENS.map(p=>`<option>${p}</option>`).join('')}</select><button class="btn" data-a="addS">+ إضافة رأس</button></div><div class="card" id="hl"></div>`;
+const herdList=()=>{const q=$('#q').value.trim(),p=$('#pf').value,r=D.sheep.filter(s=>(!q||(s.tag+s.type).includes(q))&&(!p||s.pen==p));$('#hl').innerHTML=r.length?r.map(s=>{const h=hs(s);return `<button class="row hr" data-a="id" data-v="${s.id}"><span class="st ${h.c}" style="margin:0"><i></i></span><span style="flex:1"><b>${esc(s.tag)}</b> ${esc(s.type)} ${s.gender=='ذكر'?'♂':'♀'}<br><small style="color:var(--mut)">${esc(s.pen)} | ${esc(s.status)}</small></span><i>‹</i></button>`}).join(''):'<p class="empty">ما لقينا نتيجة. جرّب بحث ثاني أو اضغط + لإضافة رأس.</p>'};
+V.breed=()=>{const r=D.breed.map(b=>({...b,d:dl(b.due)})).sort((a,b)=>a.d-b.d);return `<div class="toolbar"><button class="btn" data-a="addB">+ تسجيل ضراب</button></div>${repeatCard()}<p style="color:var(--mut);margin-bottom:10px">مدة الحمل المتوقعة 150 يوم، ويحسب البرنامج موعد الولادة تلقائياً.</p>${r.map(b=>`<div class="card"><div class="row" style="border:0;padding:0"><div><b style="font-size:1.2rem">${esc(b.tag)}</b> <span class="tag">الفحل ${esc(b.sire)}</span></div><div>${(b.res||'حامل')=='انتظار'?`<button class="btn" data-a="chk" data-v="${b.id}">فحص الحمل</button>`:`<button class="btn" data-a="birth" data-v="${b.id}">تمت الولادة</button>`} <button class="mini d" data-a="delB" data-v="${b.id}">🗑</button></div></div><div class="bar"><span style="width:${Math.min(100,Math.max(2,(150-b.d)/1.5))}%"></span></div><small style="color:var(--mut)">${(b.res||'حامل')=='انتظار'?'⏳ فحص الحمل '+(dl(b.chk)<=0?'مستحق الحين':'بعد '+dl(b.chk)+' يوم')+' | ':''}ضراب ${b.date} | ولادة ${b.due} | ${b.d>0?'باقي '+b.d+' يوم':b.d==0?'اليوم':'متأخرة '+(-b.d)+' يوم'}</small></div>`).join('')||'<p class="empty">ما فيه ضراب مسجل.</p>'}`};
+V.growth=()=>{const by={};D.weights.slice().sort((a,b)=>a.date>b.date?1:-1).forEach(w=>(by[w.tag]=by[w.tag]||[]).push(w));const rows=Object.entries(by),mx=Math.max(1,...rows.map(r=>r[1].at(-1).kg));return `<div class="toolbar"><button class="btn" data-a="addW">+ تسجيل وزن</button><button class="btn" data-a="bulkQ">⚖️ وزن شبك كامل</button></div><div class="card"><h3>آخر وزن لكل رأس (كجم)</h3><div class="bars">${rows.map(r=>`<div>${r[1].at(-1).kg}<i style="height:${r[1].at(-1).kg/mx*80}%"></i>${esc(r[0])}</div>`).join('')||'<p class="empty">سجّل أول وزن.</p>'}</div></div><div class="card"><h3>معدل النمو</h3>${rows.map(([t,w])=>{const f=w[0],l=w.at(-1),days=Math.max(1,(new Date(l.date)-new Date(f.date))/864e5),g=w.length>1?((l.kg-f.kg)/days*1000).toFixed(0):null;return `<div class="row"><b>${esc(t)}</b><span>${f.kg} ← ${l.kg} كجم</span><span class="tag">${g!==null?g+' جم/يوم':'وزن واحد'}</span></div>`}).join('')||'<p class="empty">لا توجد أوزان.</p>'}</div>`};
+V.loss=()=>`<div class="toolbar"><button class="btn" data-a="addD">+ تسجيل نفوق</button></div><div class="card">${D.dead.length?D.dead.map(d=>`<div class="row"><div><b>${esc(d.tag)}</b><br><small style="color:var(--mut)">${esc(d.reason)} | ${d.date}</small></div><button class="mini d" data-a="delD" data-v="${d.id}">🗑</button></div>`).join(''):'<p class="empty">الحمد لله، ما فيه نفوق مسجل.</p>'}</div>`;
+V.money=()=>{const s=stats(),mx=Math.max(1,s.sales,s.exp);return `<div class="kpis"><div class="kpi"><small>المبيعات</small><div class="num">${fm(s.sales)}</div></div><div class="kpi bad"><small>المصروفات</small><div class="num">${fm(s.exp)}</div></div><div class="kpi gold"><small>الصافي</small><div class="num">${fm(s.sales-s.exp)}</div></div></div><div class="card"><div class="bars"><div>${fm(s.sales)}<i style="height:${s.sales/mx*80}%"></i>مبيعات</div><div>${fm(s.exp)}<i style="height:${s.exp/mx*80}%;background:var(--dng)"></i>مصروفات</div></div></div><div class="toolbar"><button class="btn" data-a="addF">+ عملية جديدة</button></div><div class="card">${D.fin.slice().reverse().map(f=>`<div class="row"><div><b>${esc(f.desc)}</b><br><small style="color:var(--mut)">${f.date}</small></div><b style="color:${f.type=='sale'?'var(--pri)':'var(--dng)'}">${f.type=='sale'?'+':'-'}${fm(f.amount)} ر.س</b><button class="mini d" data-a="delF" data-v="${f.id}">🗑</button></div>`).join('')||'<p class="empty">ما فيه عمليات.</p>'}</div>`};
+const NAV=[['dash','📊','الرئيسية'],['herd','🐑','الحلال'],['find','🔎','استعلام'],['track','🩺','المتابعة'],['cash','💰','المالية'],['ai','🤖','المستشار'],['more','🗂','المزيد']];
+V.health=()=>{const r=[];D.sheep.forEach(s=>due(s.tag).forEach(x=>r.push({...x,d:dl(x.next)})));r.sort((a,b)=>a.d-b.d);const od=r.filter(x=>x.d<0).length;return `<div class="toolbar"><button class="btn" data-a="addV">+ تسجيل تطعيم أو علاج</button></div>${od?`<div class="alert red">⚠️<span>${od} جرعة متأخرة تحتاج تطعيم الحين.</span></div>`:''}<div class="card"><h3>جدول الجرعات القادمة</h3>${r.map(x=>`<div class="row"><div><b>${esc(x.tag)}</b> ${esc(x.name)}<br><small style="color:var(--mut)">آخر جرعة ${x.date}</small></div><span class="tag" style="${x.d<0?'background:var(--dng);color:#fff':x.d<=14?'background:var(--gold);color:#000':''}">${x.d<0?'متأخر '+(-x.d)+' يوم':'بعد '+x.d+' يوم'}</span></div>`).join('')||'<p class="empty">سجّل أول تطعيم لحلالك.</p>'}</div>`};
+V.feed=()=>{const tot=D.feed.reduce((a,f)=>a+Number(f.cost),0),by={};D.feed.forEach(f=>by[f.pen]=(by[f.pen]||0)+Number(f.cost));const mx=Math.max(1,...Object.values(by));return `<div class="kpis"><div class="kpi bad"><small>تكلفة العلف</small><div class="num">${fm(tot)}</div></div><div class="kpi"><small>متوسط الرأس</small><div class="num">${D.sheep.length?fm(Math.round(tot/D.sheep.length)):0}</div></div></div><div class="card"><h3>التكلفة حسب الشبك</h3><div class="bars">${Object.entries(by).map(([p,c])=>`<div>${fm(c)}<i style="height:${c/mx*80}%"></i>${esc(p.replace('شبك ',''))}</div>`).join('')||'<p class="empty">لا توجد بيانات.</p>'}</div></div><div class="toolbar"><button class="btn" data-a="addFd">+ تسجيل علف</button></div><div class="card">${D.feed.slice().reverse().map(f=>`<div class="row"><div><b>${esc(f.item)}</b> ${f.kg} كجم<br><small style="color:var(--mut)">${esc(f.pen)} | ${f.date}</small></div><b>${fm(f.cost)} ر.س</b><button class="mini d" data-a="delFd" data-v="${f.id}">🗑</button></div>`).join('')||'<p class="empty">ما فيه سجل علف.</p>'}</div>`};
+V.more=()=>{const sr={};D.sheep.forEach(s=>{if(s.sire&&s.dam)sr[s.sire]=(sr[s.sire]||0)+1});D.breed.forEach(b=>{if(!sr[b.sire])sr[b.sire]=0});return `${syncCard()}${saveCard()}<div class="toolbar"><button class="btn" data-a="rep">🖨 كشف وتقرير</button><button class="btn" data-a="xp">📤 تصدير إكسل</button><button class="btn" data-a="imp">📥 استيراد ذكي</button><button class="btn" data-a="bk">💾 نص احتياطي</button><button class="btn" data-a="fs">🔠 حجم الخط</button><button class="btn" data-a="fresh">🧹 ابدأ ببيانات مزرعتي</button></div><div class="card"><h3>ربحية الرأس (تقديرية)</h3>${tbl(D.sheep.map(s=>{const c=(+s.buy||0)+feedPer(s.pen);return{tag:s.tag,buy:s.buy?fm(s.buy):'-',feed:fm(Math.round(feedPer(s.pen))),cost:fm(Math.round(c)),goal:fm(Math.round(c*1.2))}}),['tag','buy','feed','cost','goal'],['الرأس','الشراء','العلف','التكلفة','بيع بربح 20%'])}</div><div class="card"><h3>أداء الفحول</h3>${Object.entries(sr).map(([k,v])=>`<div class="row"><b>${esc(k)}</b><span class="tag">${v} مولود</span></div>`).join('')||'<p class="empty">لا توجد بيانات.</p>'}</div>`};
+const C39={'0':'nnnwwnwnn','1':'wnnwnnnnw','2':'nnwwnnnnw','3':'wnwwnnnnn','4':'nnnwwnnnw','5':'wnnwwnnnn','6':'nnwwwnnnn','7':'nnnwnnwnw','8':'wnnwnnwnn','9':'nnwwnnwnn','A':'wnnnnwnnw','B':'nnwnnwnnw','C':'wnwnnwnnn','D':'nnnnwwnnw','E':'wnnnwwnnn','F':'nnwnwwnnn','G':'nnnnnwwnw','H':'wnnnnwwnn','I':'nnwnnwwnn','J':'nnnnwwwnn','K':'wnnnnnnww','L':'nnwnnnnww','M':'wnwnnnnwn','N':'nnnnwnnww','O':'wnnnwnnwn','P':'nnwnwnnwn','Q':'nnnnnnwww','R':'wnnnnnwwn','S':'nnwnnnwwn','T':'nnnnwnwwn','U':'wwnnnnnnw','V':'nwwnnnnnw','W':'wwwnnnnnn','X':'nwnnwnnnw','Y':'wwnnwnnnn','Z':'nwwnwnnnn','-':'nwnnnnwnw','.':'wwnnnnwnn',' ':'nwwnnnwnn','*':'nwnnwnwnn'};
+const bars=t=>{let x=10,r='';for(const c of '*'+String(t).toUpperCase().replace(/[^0-9A-Z.\- ]/g,'-')+'*'){const q=C39[c];for(let i=0;i<9;i++){const w=q[i]=='w'?3:1;if(i%2==0)r+=`<rect x="${x}" y="0" width="${w}" height="34"/>`;x+=w}x+=1}return `<svg viewBox="0 0 ${x+10} 34" fill="#0b2a2a" role="img" aria-label="باركود ${esc(t)}">${r}</svg>`};
+const SUB={track:[['breed','الضراب'],['health','التطعيمات'],['growth','الأوزان'],['prod','الإنتاجية']],cash:[['money','المبيعات'],['feed','الأعلاف'],['loss','النفوق']]},sub={track:'breed',cash:'money'};
+const seg=k=>`<div class="seg">${SUB[k].map(x=>`<button class="${sub[k]==x[0]?'on':''}" data-a="sub" data-v="${k}:${x[0]}">${x[1]}</button>`).join('')}</div>`;
+V.track=()=>seg('track')+V[sub.track]();V.cash=()=>seg('cash')+V[sub.cash]();
+const tasks=()=>{const t=[],od=D.sheep.filter(x=>hs(x).c=='bad').length;if(od)t.push(['💉',od+' رأس تطعيمها متأخر','go','health','bad']);D.breed.map(b=>({...b,d:dl(b.due)})).filter(b=>b.d<=14&&(b.res||'حامل')=='حامل').sort((a,b)=>a.d-b.d).forEach(b=>{const s=D.sheep.find(x=>x.tag==b.tag);if(s)t.push(['🍼',b.tag+(b.d>0?' تلد بعد '+b.d+' يوم':' حان موعد ولادتها'),'id',s.id,b.d<=3?'bad':''])});D.breed.filter(b=>(b.res||'حامل')=='انتظار'&&dl(b.chk)<=0).forEach(b=>t.push(['🔍',b.tag+' فحص الحمل مستحق (مرت '+(-dl(b.date))+' يوم)','chk',b.id,'bad']));
+D.sheep.filter(x=>x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل')).forEach(x=>t.push(['⚠️',x.tag+' وصلت 4 ضرابات بدون حمل، مشكلة','id',x.id,'bad']));
+const nb=bad().length;if(nb)t.push(['📉',nb+' رأس غير منتجة وتشكل عبئ','sub','prod','bad']);const ns=D.sheep.filter(x=>!x.since).length;if(ns)t.push(['📅',ns+' رأس بدون تاريخ دخول، أضفه لتفعيل تنبيه الإنتاج','go','herd','']);
+const w=D.sheep.filter(x=>x.status.includes('جاهز للبيع')).length;if(w)t.push(['💰',w+' رأس جاهزة للبيع','go','herd','']);return t};
+const taskCard=()=>{if(!D.sheep.length)return `<div class="card"><h3>ابدأ مراحك</h3><p style="margin-bottom:10px;color:var(--mut)">أضف أول رأس وتطلع له بطاقة وباركود.</p><button class="btn" data-a="addS">+ أضف أول رأس</button></div>`;const t=tasks();return `<div class="card"><h3>مهام اليوم</h3>${t.length?t.map(x=>`<button class="task ${x[4]}" data-a="task" data-v="${x[2]}:${x[3]}"><b>${x[0]}</b><span>${x[1]}</span><i>‹</i></button>`).join(''):'<p class="empty">✅ كل شي تمام اليوم.</p>'}</div>`};
+const pick=(t,fn)=>tags().length?form(t,[['t','الرأس','select',tags()]],d=>fn(D.sheep.find(s=>s.tag==d.t).id)):toast('أضف حلال أولاً');
+V.find=()=>`<div class="card"><h3>استعلام عن رأس</h3><p style="color:var(--mut);margin-bottom:10px">اكتب الكود أو امسح الباركود من بطاقة الرأس، وتطلع لك هويته الكاملة.</p><div class="toolbar"><input id="qc" placeholder="مثال: N-101" autocapitalize="characters" style="font-size:1.2rem"><button class="btn" data-a="find">بحث</button><button class="btn" data-a="scan">📷 مسح</button></div><video id="vid" playsinline hidden style="width:100%;border-radius:14px;margin-top:8px"></video></div><div id="fr"></div>`;
+const SEC=[['sheep','الحلال',[['tag','الرقم'],['type','السلالة'],['gender','الجنس'],['pen','الشبك'],['status','الحالة'],['buy','سعر الشراء'],['dam','الأم'],['sire','الأب'],['since','تاريخ الدخول'],['tries','عدد الضرابات'],['lastB','آخر ضراب'],['lastBirth','آخر ولادة']]],['breed','الضراب',[['tag','الشاة'],['sire','الفحل'],['date','تاريخ الضراب'],['due','موعد الولادة'],['res','الحالة'],['chk','موعد الفحص']]],['hist','سجل الضراب',[['tag','الشاة'],['sire','الفحل'],['date','التاريخ'],['n','رقم الضراب'],['gap','الفترة (يوم)'],['res','النتيجة']]],['weights','الأوزان',[['tag','الرأس'],['kg','الوزن (كجم)'],['date','التاريخ']]],['vax','التطعيمات',[['tag','الرأس'],['name','التطعيم'],['date','تاريخ الجرعة'],['next','الجرعة القادمة']]],['feed','الأعلاف',[['pen','الشبك'],['item','النوع'],['kg','الكمية (كجم)'],['cost','التكلفة (ر.س)'],['date','التاريخ']]],['dead','النفوق',[['tag','الرأس'],['reason','السبب'],['date','التاريخ']]],['fin','المالية',[['type','النوع'],['desc','الوصف'],['amount','المبلغ (ر.س)'],['date','التاريخ']]]];
+const saveCard=()=>{let t=0;try{t=+localStorage.getItem(K+'_t')}catch(e){}const ok=saved&&t;return `<div class="alert ${ok?'':'red'}">${ok?'✅':'⚠️'}<span>${ok?'بياناتك محفوظة على هذا الجهاز، آخر حفظ '+new Date(t).toLocaleString('ar-SA'):'تعذر الحفظ على الجهاز. صدّر نسخة إكسل الحين.'}</span></div>`};
+const SYS='أنت مستشار خبير بإدارة مراعي الأغنام في السعودية. جاوب بالعربية بلهجة بسيطة، عملي ومختصر، واعتمد فقط على البيانات المعطاة ولا تخترع أرقام. في الأمور الصحية الخطيرة انصح بمراجعة بيطري.';
+const ctx=()=>JSON.stringify({today:T(),sheep:D.sheep.slice(0,150).map(x=>({tag:x.tag,type:x.type,sex:x.gender,pen:x.pen,status:x.status,buy:x.buy,dam:x.dam,sire:x.sire,since:x.since,tries:x.tries,lastBirth:x.lastBirth,w:lst(D.weights,x.tag).slice(-3).map(w=>[w.date,w.kg]),vax:due(x.tag).map(v=>[v.name,v.date,v.next])})),breed:D.breed,dead:D.dead,fin:D.fin.slice(-30),feed:D.feed.slice(-30)});
+const ai=async()=>{try{return await window.claude.use('sample')}catch(e){return null}};
+const aout=h=>{const o=$('#ao');if(!o)return;o.style.display='block';o.innerHTML=h};
+const aerr=e=>aout(e&&e.code=='rate_limited'?'⏳ كثرت الطلبات، جرّب بعد شوي.':e&&e.code=='not_granted'?'ما وافقت على استخدام الذكاء. اضغط مرة ثانية ووافق.':'تعذر الاتصال بالذكاء الآن. جرّب مرة ثانية.');
+const stream=async q=>{const sm=await ai();if(!sm)return aout('الذكاء غير متاح في هذي النسخة من الصفحة.');aout('جاري التفكير…');try{await sm(SYS+'\nبيانات المراح:\n'+ctx()+'\n'+q,{cache:false,onText:({text})=>aout(esc(text))})}catch(e){aerr(e)}};
+let ACT=[],NEWD={};
+const dsc=a=>({weight:`وزن ${a.tag}: ${a.kg} كجم`,sell:`بيع ${a.tag} بـ ${a.amount} ر.س`,dead:`نفوق ${a.tag} (${a.reason||'-'})`,birth:`ولادة ${a.tag}: ${a.n||1} ${a.gender||''}`,vax:`تطعيم ${a.name} لـ ${a.to}`,feed:`علف ${a.item} ${a.kg} كجم لـ ${a.pen}`,add:`إضافة رأس ${a.tag}`,breed:`ضراب ${a.tag} × ${a.sire||'-'}`,fin:`${a.type=='sale'?'بيع':'مصروف'}: ${a.desc} ${a.amount}`})[a.act]||'عملية غير معروفة';
+const run=a=>{const s=D.sheep.find(x=>x.tag==a.tag),d=T();switch(a.act){
+case'weight':if(!s||!(+a.kg>0))return 0;D.weights.push({id:uid(),tag:s.tag,kg:+a.kg,date:d});break;
+case'sell':if(!s||!(+a.amount>=0))return 0;D.fin.push({id:uid(),type:'sale',desc:'بيع '+s.tag+' '+s.type,amount:+a.amount,date:d});D.sheep=D.sheep.filter(x=>x!==s);break;
+case'dead':if(!s)return 0;D.dead.push({id:uid(),tag:s.tag,reason:a.reason||'غير محدد',date:d});D.sheep=D.sheep.filter(x=>x!==s);break;
+case'birth':{if(!s)return 0;const b=D.breed.find(x=>x.tag==a.tag);for(let i=1;i<=(+a.n||1);i++)D.sheep.push({id:uid(),tag:a.tag+'-L'+i,type:s.type,gender:a.gender=='ذكر'?'ذكر':'أنثى',pen:PENS[0],status:'مولود جديد',dam:a.tag,sire:b?b.sire:'',since:d});s.status='مرضع';s.tries=0;s.lastB='';s.lastBirth=d;const hh=b&&D.hist.find(x=>x.id==b.id);if(hh)hh.res='ولدت';D.breed=D.breed.filter(x=>x.tag!=a.tag);break}
+case'vax':{const tg=PENS.includes(a.to)?D.sheep.filter(x=>x.pen==a.to).map(x=>x.tag):D.sheep.some(x=>x.tag==a.to)?[a.to]:[];if(!tg.length||!a.name)return 0;tg.forEach(g=>D.vax.push({id:uid(),tag:g,name:a.name,date:d,next:add(d,+a.days||180)}));break}
+case'feed':D.feed.push({id:uid(),pen:PENS.includes(a.pen)?a.pen:PENS[2],item:a.item||'شعير',kg:+a.kg||0,cost:+a.cost||0,date:d});break;
+case'add':if(!a.tag||D.sheep.some(x=>x.tag==a.tag))return 0;D.sheep.push({id:uid(),tag:a.tag,type:a.type||'نعيمي',gender:a.gender=='ذكر'?'ذكر':'أنثى',pen:PENS.includes(a.pen)?a.pen:PENS[0],status:a.status||'سليم',since:d});break;
+case'breed':if(!s)return 0;breedAdd(a.tag,a.sire||'',d);break;
+case'fin':D.fin.push({id:uid(),type:a.type=='sale'?'sale':'expense',desc:a.desc||'-',amount:+a.amount||0,date:d});break;
+default:return 0}return 1};
+V.ai=()=>`<div class="card"><h3>🤖 اسأل مستشار المراح</h3><div class="toolbar"><input id="aq" placeholder="مثال: أي رأس أبيعه الحين؟"><button class="btn" data-a="ask">اسأل</button></div><button class="btn" data-a="week" style="width:100%">📊 حلل مراحي هالأسبوع</button></div><div class="card"><h3>🎙 سجّل بالكلام</h3><textarea id="at" rows="3" placeholder="مثال: ولدت N-101 توأم ذكور، ووزنت T-301 على 47، وعلفنا شبك التسمين شعير 200 كجم بـ 500" style="width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px"></textarea><p style="color:var(--mut);font-size:.85rem">تقدر تستخدم المايك حق لوحة المفاتيح.</p><button class="btn" data-a="parse" style="width:100%">حوّلها لسجلات</button></div><div class="card" id="ao" style="white-space:pre-wrap;display:none"></div>`;
+const nd=v=>{if(v instanceof Date)return new Date(v.getTime()+432e5).toISOString().slice(0,10);if(typeof v=='number'&&v>20000&&v<80000)return new Date(Math.round((v-25569)*864e5)).toISOString().slice(0,10);const x=new Date(v);return v&&!isNaN(x)?x.toISOString().slice(0,10):T()},nn=v=>parseFloat(String(v).replace(/[^\d.\-]/g,''))||0,NUM=['kg','cost','amount','buy','tries','n','gap'],DT=['date','due','next','chk','since','lastB','lastBirth'],kk=x=>JSON.stringify(Object.entries(x).filter(e=>e[0]!='id'&&e[0]!='photo').sort());
+const mapImport=async wb=>{const SH=wb.SheetNames.map(n=>({n,rows:XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:true,defval:''}).filter(r=>r.some(c=>c!==''))})).filter(x=>x.rows.length>1),plan=[];
+SH.forEach(x=>{const sec=SEC.find(c=>c[1]==x.n);if(!sec)return;const hi=x.rows.findIndex(r=>sec[2].filter(c=>r.includes(c[1])).length>=2);if(hi<0)return;const cols={};x.rows[hi].forEach((h,i)=>{const c=sec[2].find(c=>c[1]==h);if(c)cols[i]=c[0]});plan.push({src:x.n,k:sec[0],rows:x.rows.slice(hi+1),cols})});
+const rest=SH.filter(x=>!plan.some(p=>p.src==x.n));
+if(rest.length){const sm=await ai();if(!sm){if(!plan.length)return toast('الذكاء غير متاح، استخدم ملف مصدّر من مراح')}else{toast('الذكاء يحلل الملف…');try{const m=await sm.json(`حلل أوراق جدول لبرنامج أغنام. لكل ورقة حدد القسم المناسب (sheep,breed,weights,vax,feed,dead,fin أو null) ورقم صف العناوين (يبدأ من 0، أو -1 لو ما فيه عناوين) وربط رقم العمود بالحقل حتى لو اختلفت الأسماء أو اللغة أو الترتيب. الأقسام والحقول: ${SEC.map(c=>c[0]+'('+c[2].map(f=>f[0]+' '+f[1]).join(', ')+')').join('; ')}. أرجع JSON فقط: [{"sheet":"","section":"","headerRow":0,"cols":{"0":"tag"}}].\nالأوراق: ${JSON.stringify(rest.map(x=>({sheet:x.n,rows:x.rows.slice(0,7).map(r=>r.slice(0,14).map(c=>String(c).slice(0,30)))})))}`);(Array.isArray(m)?m:[]).forEach(e=>{const x=rest.find(c=>c.n==e.sheet);if(x&&SEC.some(c=>c[0]==e.section)&&e.headerRow>=-1&&e.cols)plan.push({src:x.n,k:e.section,rows:x.rows.slice(e.headerRow+1),cols:e.cols})})}catch(e){if(!plan.length)return toast('تعذر تحليل الملف بالذكاء')}}}
+NEWD={};SEC.forEach(c=>NEWD[c[0]]=[]);
+plan.forEach(p=>{const ok=SEC.find(c=>c[0]==p.k)[2].map(c=>c[0]),seen=new Set([...D[p.k],...NEWD[p.k]].map(kk));p.rows.forEach(r=>{const o={};Object.entries(p.cols).forEach(([i,f])=>{const v=r[i];if(!ok.includes(f)||v===''||v==null)return;o[f]=NUM.includes(f)?nn(v):DT.includes(f)?nd(v):String(v).trim()});if(!Object.keys(o).length)return;const k=p.k;
+if(k=='sheep'){if(!o.tag||D.sheep.some(x=>x.tag==o.tag)||NEWD.sheep.some(x=>x.tag==o.tag))return;o.gender=/ذكر|male|^m$|♂/i.test(o.gender||'')?'ذكر':'أنثى';o.pen=o.pen||PENS[0];o.type=o.type||'نعيمي';o.status=o.status||'سليم'}
+if(k=='fin'){o.type=/بيع|sale|إيراد|ايراد|دخل|income/i.test(o.type||'')?'sale':'expense';o.date=o.date||T()}
+if(k=='breed'){if(!o.tag)return;o.date=o.date||T();o.due=o.due||add(o.date,150)}
+if(k=='vax'){if(!o.tag||!o.name)return;o.date=o.date||T();o.next=o.next||add(o.date,180)}
+if(['weights','dead','feed','hist'].includes(k))o.date=o.date||T();
+const key=kk(o);if(seen.has(key))return;seen.add(key);NEWD[k].push({id:uid(),...o})})});
+const tot=SEC.filter(c=>NEWD[c[0]].length);if(!tot.length)return toast('ما لقيت بيانات جديدة أعرف مكانها في الملف');
+openM(`<h3>جاهز للاستيراد</h3>${tot.map(c=>`<div class="row"><span>${c[1]}</span><b>${NEWD[c[0]].length}</b></div>`).join('')}<p style="color:var(--mut);margin:8px 0">الصور ما تنتقل عبر الإكسل. تقدر تتراجع بعد الاستيراد.</p><div class="toolbar"><button class="btn" data-a="impGo" data-v="m">دمج مع الحالي</button><button class="btn" style="background:var(--dng)" data-a="impGo" data-v="r">استبدال الكل</button></div>`)};
+const mo=d=>d?(new Date(T())-new Date(d))/2592e6:0;
+const breedAdd=(tag,sire,date)=>{const s=D.sheep.find(x=>x.tag==tag),id=uid(),pv=D.breed.find(b=>b.tag==tag&&(b.res||'حامل')=='انتظار');if(pv){const h=D.hist.find(x=>x.id==pv.id);if(h)h.res='لم تلقح';D.breed=D.breed.filter(b=>b!==pv)}
+const n=(s&&s.tries||0)+1,gap=s&&s.lastB?Math.round((new Date(date)-new Date(s.lastB))/864e5):'';D.breed.push({id,tag,sire,date,due:add(date,150),res:'انتظار',chk:add(date,14)});D.hist.push({id,tag,sire,date,n,gap,res:'انتظار'});if(s){s.tries=n;s.lastB=date;s.status='ضراب بانتظار الفحص'}return 'ضراب رقم '+n+(gap?' (بعد '+gap+' يوم من السابق)':'')+(n>=4?' ⚠️ وصلت 4 ضرابات، مشكلة':'')+'. افحص الحمل بعد 14 يوم'};
+const preg=x=>D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل')||(x.status||'').includes('دفيع');
+const prod=x=>x.lastBirth||D.sheep.some(k=>k.dam==x.tag)||D.hist.some(h=>h.tag==x.tag&&h.res=='ولدت');
+const probs=x=>{const r=[],pend=D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='انتظار');if(x.gender=='أنثى'){if(x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل'))r.push(['bad',x.tries+' ضرابات بدون حمل','فحص بيطري أو استبعاد']);if(x.since&&mo(x.since)>=8&&!prod(x)&&!preg(x)&&!pend)r.push(['bad','مضى '+Math.floor(mo(x.since))+' أشهر بالمراح بدون ولادة','بيع أو استبدال']);if(x.lastBirth&&-dl(x.lastBirth)>180&&!preg(x)&&!pend)r.push(['warn','مفتوحة '+(-dl(x.lastBirth))+' يوم منذ آخر ولادة','فحص وإعادة ضراب'])}else if((x.status||'').includes('فحل')&&x.since&&mo(x.since)>=8&&!D.hist.some(h=>h.sire==x.tag&&-dl(h.date)<=240)&&!D.breed.some(b=>b.sire==x.tag))r.push(['warn','فحل بدون ضراب مسجل منذ 8 أشهر','قيّم قدرته أو استبدله']);
+const w=lst(D.weights,x.tag);if(w.length>1&&x.gender=='ذكر'&&!(x.status||'').includes('فحل')){const g=(w.at(-1).kg-w[0].kg)/Math.max(1,(new Date(w.at(-1).date)-new Date(w[0].date))/864e5)*1000;if(g<100)r.push(['warn','نمو بطيء '+Math.round(g)+' جم/يوم','راجع العلف أو بع مبكراً'])}return r};
+const bad=()=>D.sheep.map(x=>({s:x,p:probs(x)})).filter(x=>x.p.length);
+const repeatCard=()=>{const r=D.sheep.filter(x=>x.tries>=2);if(!r.length)return '';return `<div class="card"><h3>إعادة الضراب</h3>${r.map(x=>{const h=D.hist.filter(y=>y.tag==x.tag).slice(-x.tries),pr=x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل');return `<div class="row"><div><b>${esc(x.tag)}</b> <span class="tag">${x.tries} ضرابات</span><br><small style="color:var(--mut)">${h.map(y=>y.gap?'بعد '+y.gap+' يوم':'الأول').join(' ← ')}</small></div>${pr?'<span class="tag" style="background:var(--dng);color:#fff">مشكلة</span>':''}</div>`}).join('')}</div>`};
+V.prod=()=>{const L=bad();return `<div class="card"><h3>الحلال غير المنتج</h3><p style="color:var(--mut);margin-bottom:8px">يفحص تلقائياً: 4 ضرابات بدون حمل، 8 أشهر بدون ولادة، فترة مفتوحة طويلة، فحل بدون ضراب، وتسمين بطيء.</p>${L.length?L.map(({s:x,p})=>`<div class="row" style="align-items:flex-start"><div style="flex:1"><b>${esc(x.tag)}</b> <span class="tag">تكلفتها ${fm(Math.round((+x.buy||0)+feedPer(x.pen)))} ر.س</span>${p.map(y=>`<div class="alert ${y[0]=='bad'?'red':''}" style="margin:6px 0 0">${y[0]=='bad'?'⚠️':'🔸'}<span>${y[1]}<br><small>${y[2]}</small></span></div>`).join('')}</div><div><button class="mini" data-a="id" data-v="${x.id}">بطاقة</button> <button class="mini" data-a="sell" data-v="${x.id}">بيع</button></div></div>`).join(''):'<p class="empty">✅ ما فيه حلال غير منتج حالياً.</p>'}</div>${repeatCard()}`};
+let DB=null,SYNC=false,CAN=null,pt,lastJ={},RM={},hy=new Set();
+const strip=k=>k=='sheep'?D.sheep.map(({photo,...r})=>r):D[k]||[];
+const applyRemote=(k,r)=>{const ph={};if(k=='sheep')D.sheep.forEach(a=>{if(a.photo)ph[a.id]=a.photo});D[k]=JSON.parse(JSON.stringify(r));if(k=='sheep')D.sheep.forEach(a=>{if(ph[a.id])a.photo=ph[a.id]});try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
+const refresh=()=>{const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))go(cur)};
+const push=()=>{if(!DB||!SYNC||hy.size<SEC.length)return;clearTimeout(pt);pt=setTimeout(()=>SEC.forEach(x=>{const k=x[0],rows=strip(k),j=JSON.stringify(rows);if(j==lastJ[k])return;if(j.length>200000)return toast('⚠️ قسم '+x[1]+' كبير جداً للمزامنة، صدّر إكسل ونظّف القديم');lastJ[k]=j;DB.doc('sync/'+k).set({rows,t:Date.now()}).catch(e=>{lastJ[k]=JSON.stringify(RM[k]||[]);applyRemote(k,RM[k]||[]);refresh();toast('تعذرت المزامنة: تأكد أن عندك صلاحية تعديل')})}),700)};
+const initSync=async()=>{try{DB=await window.claude.use('db')}catch(e){}if(!DB)return;try{const u=await window.claude.use('user');CAN=u?await u.can('data.write'):null}catch(e){}
+DB.doc('sync/meta').onSnapshot(x=>{SYNC=x.exists;if(cur=='more')refresh()},()=>{});
+SEC.forEach(x=>{const k=x[0];DB.doc('sync/'+k).onSnapshot(d=>{hy.add(k);if(!d.exists)return;const r=d.data().rows||[],j=JSON.stringify(r);RM[k]=r;if(j==lastJ[k])return;lastJ[k]=j;applyRemote(k,r);refresh()},()=>{})})};
+const syncCard=()=>!DB?'':SYNC?`<div class="card"><h3>☁️ المزامنة شغالة</h3><p>أي تعديل منك أو من الراعي يظهر عند الكل. صلاحيتك: ${CAN===false?'قراءة فقط':'تعديل'}.</p><p style="color:var(--mut);font-size:.9rem;margin-top:6px">لإضافة الراعي: شارك رابط الصفحة معه من زر المشاركة في كلود وأعطه صلاحية مساهم. الصور تبقى على جهاز كل شخص.</p></div>`:`<div class="card"><h3>☁️ مزامنة بين الأجهزة</h3><p style="margin-bottom:10px;color:var(--mut)">ترفع بياناتك الحالية، ويشوفها الراعي ويسجل عليها من جواله.</p><button class="btn" data-a="syncOn" style="width:100%">فعّل المزامنة وارفع بياناتي</button></div>`;
+let cur='dash',first=true;
+function go(v){window.stopCam&&stopCam();cur=v;$('#nav').innerHTML=NAV.map(n=>`<button class="${n[0]==v?'on':''}" data-a="nav" data-v="${n[0]}"><b>${n[1]}</b>${n[2]}</button>`).join('');$('#view').innerHTML=V[v]();if(v=='find')$('#qc').onkeydown=e=>{if(e.key=='Enter')A.find()};if(v=='herd'){herdList();$('#q').oninput=$('#pf').onchange=herdList}
+document.querySelectorAll('[data-n]').forEach(e=>{const n=+e.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/900);e.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)});scrollTo(0,0)}
+let snap='';
+const undo=(m,o)=>{const t=$('#toast');t.innerHTML=m+' <button id="un" style="color:var(--gold);font-weight:700;margin-inline-start:10px">تراجع</button>';t.classList.add('on','u');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on','u'),6000);$('#un').onclick=()=>{D=JSON.parse(o);t.classList.remove('on','u');re()}};
+const re=m=>{save();go(cur);if(m)undo(m,snap)};
+const A={nav:v=>go(v),
+k:v=>{const s=stats();if(v=='alive')openM('<h3>الحلال الحي ('+s.al+')</h3>'+tbl(D.sheep,['tag','type','pen','status'],['الرقم','السلالة','الشبك','الحالة']));
+if(v=='preg')openM('<h3>الدفيع والمقربة</h3>'+tbl(D.sheep.filter(x=>x.status.includes('دفيع')),['tag','type','pen','status'],['الرقم','السلالة','الشبك','الحالة']));
+if(v=='dead')openM('<h3>سجل النفوق</h3>'+tbl(D.dead,['tag','reason','date'],['الرقم','السبب','التاريخ']));
+if(v=='rate')openM(`<h3>تقرير الهلاك</h3><div style="text-align:center"><div class="num" style="font-size:3rem;color:${+s.rate>3?'var(--dng)':'var(--pri)'}">${s.rate}%</div><p>أحياء ${s.al} | نافقة ${s.dd}</p><p style="margin-top:8px">${+s.rate<=3?'✅ النسبة ضمن الحد الطبيعي (أقل من 3%).':'⚠️ النسبة مرتفعة. افحص التهوية والتطعيمات.'}</p></div>`);
+if(v=='fin'){sub.cash='money';go('cash')}},
+pen:v=>{const r=D.sheep.filter(s=>s.pen==v);openM(`<h3>${esc(v)} (${r.length})</h3>`+tbl(r,['tag','type','gender','status'],['الرقم','السلالة','الجنس','الحالة']))},
+addS:()=>form('إضافة رأس جديد',[['tag','رقم الرأس','text'],['type','السلالة','select',['نعيمي','حري','نجدي','سواكني','أخرى']],['gender','الجنس','select',['أنثى','ذكر']],['pen','الشبك','select',PENS],['status','الحالة','select',['سليم','دفيع مؤكد','فحل ضارب','تسمين','جاهز للبيع','طلي نامي']],['since','تاريخ دخول المراح','date',T()],['buy','سعر الشراء (اختياري)','number','','o'],['dam','الأم (اختياري)','text','','o'],['sire','الأب (اختياري)','text','','o']],d=>{if(D.sheep.some(s=>s.tag==d.tag))return toast('الرقم مسجل من قبل');D.sheep.push({id:uid(),...d});re();toast('تمت إضافة '+d.tag)}),
+wa:v=>{const s=D.sheep.find(x=>x.id==v);open('https://wa.me/?text='+encodeURIComponent(`السلام عليكم ورحمة الله،\nعرض حلال من *مَراح*:\n🐑 *رقم الرأس:* ${s.tag}\n🔹 *السلالة:* ${s.type}\n⚧ *الجنس:* ${s.gender}\n🏠 *الموقع:* ${s.pen}`),'_blank')},
+sell:v=>{const s=D.sheep.find(x=>x.id==v);form('بيع '+s.tag,[['amount','سعر البيع (ر.س)','number']],d=>{D.fin.push({id:uid(),type:'sale',desc:'بيع '+s.tag+' '+s.type,amount:+d.amount,date:T()});D.sheep=D.sheep.filter(x=>x.id!=v);re('تم البيع وسُجل في المالية')})},
+die:v=>{const s=D.sheep.find(x=>x.id==v);form('تسجيل نفوق '+s.tag,[['reason','سبب النفوق','text']],d=>{D.dead.push({id:uid(),tag:s.tag,reason:d.reason,date:T()});D.sheep=D.sheep.filter(x=>x.id!=v);re('تم تسجيل النفوق')})},
+delS:v=>{D.sheep=D.sheep.filter(x=>x.id!=v);re('تم حذف الرأس')},
+addB:()=>{if(!females().length)return toast('أضف شاة أنثى أولاً');form('تسجيل ضراب',[['tag','الشاة','select',females()],['sire','الفحل','select',males().length?males():['غير محدد']],['date','تاريخ الضراب','date',T()]],d=>{const m=breedAdd(d.tag,d.sire,d.date);re();toast(m)})},
+birth:v=>{const b=D.breed.find(x=>x.id==v);form('ولادة '+b.tag,[['n','عدد المواليد','number'],['g','الجنس','select',['أنثى','ذكر']]],d=>{for(let i=1;i<=+d.n;i++)D.sheep.push({id:uid(),tag:b.tag+'-L'+i,type:(D.sheep.find(x=>x.tag==b.tag)||{}).type||'نعيمي',gender:d.g,pen:PENS[0],status:'مولود جديد',dam:b.tag,sire:b.sire,since:T()});const m=D.sheep.find(x=>x.tag==b.tag);if(m){m.status='مرضع';m.tries=0;m.lastB='';m.lastBirth=T()}const hh=D.hist.find(x=>x.id==v);if(hh)hh.res='ولدت';D.breed=D.breed.filter(x=>x.id!=v);re('تم حذف الضراب');toast('مبروك، أضيف '+d.n+' مولود')})},
+delB:v=>{D.breed=D.breed.filter(x=>x.id!=v);re()},
+addW:t=>tags().length?form('تسجيل وزن',[['tag','الرأس','select',t?[t]:tags()],['kg','الوزن (كجم)','number'],['date','التاريخ','date',T()]],d=>{D.weights.push({id:uid(),tag:d.tag,kg:+d.kg,date:d.date});re();toast('تم حفظ الوزن')}):toast('أضف حلال أولاً'),
+addD:()=>form('تسجيل نفوق',[['tag','رقم الرأس','text'],['reason','السبب','text'],['date','التاريخ','date',T()]],d=>{D.dead.push({id:uid(),...d});D.sheep=D.sheep.filter(x=>x.tag!=d.tag);re()}),
+delD:v=>{D.dead=D.dead.filter(x=>x.id!=v);re('تم حذف السجل')},
+addF:()=>form('عملية مالية',[['type','النوع','select',['بيع','مصروف']],['desc','الوصف','text'],['amount','المبلغ (ر.س)','number']],d=>{D.fin.push({id:uid(),...d,type:d.type=='بيع'?'sale':'expense',amount:+d.amount,date:T()});re()}),
+delF:v=>{D.fin=D.fin.filter(x=>x.id!=v);re('تم حذف العملية')},
+id:v=>openM(idCard(v)),
+chk:v=>{const b=D.breed.find(x=>x.id==v);if(!b)return;openM(`<h3>متابعة ${esc(b.tag)}</h3><p style="margin-bottom:10px">ضراب ${b.date} × ${esc(b.sire)} | مرت ${-dl(b.date)} يوم</p><div class="qg"><button data-a="chkR" data-v="${v}:حامل"><b>✅</b>حامل</button><button data-a="chkR" data-v="${v}:لم تلقح"><b>❌</b>لم تلقح</button></div><button class="btn" style="width:100%;margin-top:10px" data-a="chkR" data-v="${v}:تأجيل">تأجيل الفحص 14 يوم</button>`)},
+chkR:v=>{const[id,r]=v.split(':'),b=D.breed.find(x=>x.id==id);if(!b)return;const h=D.hist.find(x=>x.id==id),x=D.sheep.find(y=>y.tag==b.tag);closeM();
+if(r=='حامل'){b.res='حامل';if(h)h.res='حامل';if(x)x.status='دفيع مؤكد';re('تم تأكيد حمل '+b.tag)}
+else if(r=='لم تلقح'){D.breed=D.breed.filter(y=>y.id!=id);if(h)h.res='لم تلقح';if(x)x.status='لم تلقح، تحتاج إعادة ضراب';re('سُجلت '+b.tag+' غير ملقحة'+(x&&x.tries>=4?' (وصلت 4 ضرابات)':''))}
+else{b.chk=add(T(),14);re('تم التأجيل 14 يوم')}},
+edS:v=>{const x=D.sheep.find(y=>y.id==v);form('تعديل '+x.tag,[['since','تاريخ دخول المراح','date',x.since||T()],['buy','سعر الشراء','number',x.buy||'','o']],d=>{x.since=d.since;if(d.buy)x.buy=+d.buy;re('تم التعديل')})},
+syncOn:async()=>{if(!DB)return toast('المزامنة غير متاحة هنا');try{for(const x of SEC){const k=x[0],rows=strip(k);lastJ[k]=JSON.stringify(rows);RM[k]=rows;await DB.doc('sync/'+k).set({rows,t:Date.now()})}await DB.doc('sync/meta').set({on:true,t:Date.now()});SYNC=true;toast('☁️ تم تفعيل المزامنة');go('more')}catch(e){toast('تعذر التفعيل: تحتاج صلاحية تعديل')}},
+ask:()=>{const q=$('#aq').value.trim();if(q)stream('السؤال: '+q)},
+week:()=>stream('حلل المراح هالأسبوع: ملخص الحال بسطرين، ثم أهم 3 أولويات مرتبة بالعمل المطلوب، ثم المخاطر، ثم فرصة بيع أو توفير. مختصر وواضح.'),
+parse:async()=>{const t=$('#at').value.trim();if(!t)return;const sm=await ai();if(!sm)return aout('الذكاء غير متاح في هذي النسخة من الصفحة.');aout('أقرأ كلامك…');try{const r=await sm.json(`حوّل كلام مربي الأغنام إلى عمليات. أرجع JSON فقط: مصفوفة عناصر {act,...}. الأنواع: weight{tag,kg}, sell{tag,amount}, dead{tag,reason}, birth{tag,n,gender:"ذكر"|"أنثى"}, vax{to,name,days}, feed{pen,item,kg,cost}, add{tag,type,gender,pen,status}, breed{tag,sire}, fin{type:"sale"|"expense",desc,amount}. الأرقام المسجلة: ${tags().join(',')}. الأشباك: ${PENS.join(',')}. طابق الأرقام بالأقرب (n101 = N-101). تجاهل ما لا تفهمه.\nالكلام: ${t}`);ACT=(Array.isArray(r)?r:[]).filter(a=>a&&a.act);aout(ACT.length?'<b>فهمت هذي العمليات:</b>'+ACT.map(a=>'\n• '+esc(dsc(a))).join('')+'\n<button class="btn" data-a="runAct" style="width:100%;margin-top:10px">نفّذ الكل</button>':'ما فهمت عملية واضحة، جرّب صياغة ثانية.')}catch(e){aerr(e)}},
+runAct:()=>{let n=0;ACT.forEach(a=>{try{n+=run(a)}catch(e){}});re('نُفذت '+n+' من '+ACT.length+' عملية')},
+xp:async()=>{if(!window.XLSX)return toast('مكتبة الإكسل ما حُمّلت، تأكد من الاتصال');const wb=XLSX.utils.book_new();wb.Workbook={Views:[{RTL:true}]};SEC.forEach(([k,n,f])=>{const rows=[['مراح | سجل '+n+' | '+T()],[],f.map(c=>c[1]),...D[k].map(r=>f.map(c=>k=='fin'&&c[0]=='type'?(r.type=='sale'?'بيع':'مصروف'):r[c[0]]??''))],ws=XLSX.utils.aoa_to_sheet(rows);ws['!cols']=f.map(()=>({wch:18}));ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:f.length-1}}];XLSX.utils.book_append_sheet(wb,ws,n)});const out=XLSX.write(wb,{bookType:'xlsx',type:'array'});let dl=null;try{dl=await window.claude.use('downloads')}catch(e){}if(!dl)return toast('التصدير غير متاح هنا');try{await dl.save({filename:'marah-'+T()+'.xlsx',data:new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})});toast('تم التصدير')}catch(e){toast('لم يتم الحفظ')}},
+imp:()=>{const i=document.createElement('input');i.type='file';i.accept='.xlsx,.xls,.csv';i.onchange=async()=>{const f=i.files[0];if(!f)return;if(!window.XLSX)return toast('مكتبة الإكسل ما حُمّلت');toast('أقرأ الملف…');try{await mapImport(XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:true}))}catch(e){toast('تعذر قراءة الملف')}};i.click()},
+impGo:v=>{SEC.forEach(c=>D[c[0]]=v=='r'?NEWD[c[0]]:D[c[0]].concat(NEWD[c[0]]));closeM();re('تم الاستيراد')},
+pid:v=>{openM(idCard(v));setTimeout(print,200)},
+sub:v=>{const[k,x]=v.split(':');sub[k]=x;go(k)},
+task:v=>{const[k,x]=v.split(':');if(k=='id')return A.id(x);if(k=='chk')return A.chk(x);if(k=='sub'){sub.track=x;return go('track')}if(x=='health'){sub.track='health';go('track')}else go(x)},
+fab:()=>openM(`<h3>عملية سريعة</h3><div class="qg">${[['⚖️','وزن','addW'],['💉','تطعيم','addV'],['🍼','ولادة','birthQ'],['🤰','ضراب','addB'],['💰','بيع','sellQ'],['☠️','نفوق','dieQ'],['🌾','علف','addFd'],['➕','رأس جديد','addS']].map(q=>`<button data-a="${q[2]}"><b>${q[0]}</b>${q[1]}</button>`).join('')}</div>`),
+sellQ:()=>pick('بيع رأس',A.sell),dieQ:()=>pick('تسجيل نفوق',A.die),
+birthQ:()=>{const L=D.breed.filter(b=>(b.res||'حامل')=='حامل');return L.length?form('ولادة',[['t','الشاة','select',L.map(b=>b.tag)]],d=>A.birth(L.find(b=>b.tag==d.t).id)):toast('ما فيه حمل مؤكد')},
+bulkQ:()=>form('وزن جماعي',[['p','الشبك','select',PENS]],d=>A.bulk(d.p)),
+bulk:p=>{const r=D.sheep.filter(s=>s.pen==p);if(!r.length)return toast('الشبك فاضي');openM(`<h3>وزن ${esc(p)}</h3><form id="fm">${r.map(s=>`<label>${esc(s.tag)} <input type="number" step="any" inputmode="decimal" name="${esc(s.tag)}" placeholder="كجم"></label>`).join('')}<button class="btn">حفظ الأوزان</button></form>`);$('#fm').onsubmit=e=>{e.preventDefault();snap=JSON.stringify(D);let n=0;new FormData(e.target).forEach((v,k)=>{if(v){D.weights.push({id:uid(),tag:k,kg:+v,date:T()});n++}});closeM();re();toast('سُجل '+n+' وزن')}},
+fresh:()=>{D={sheep:[],breed:[],weights:[],dead:[],fin:[],vax:[],feed:[],hist:[],m2:1,m3:1};re('تم مسح البيانات التجريبية')},
+fs:()=>{const r=document.documentElement,z=((+r.dataset.fs||0)+1)%3;r.dataset.fs=z;r.style.fontSize=[16,18,20][z]+'px';try{localStorage.setItem('marah_fs',z)}catch(e){}toast('حجم الخط: '+['عادي','كبير','كبير جداً'][z])},
+find:()=>{const c=$('#qc').value.trim().toUpperCase(),o=$('#fr');if(!c){o.innerHTML='';return}const s=D.sheep.find(x=>x.tag.toUpperCase()==c||x.id.toUpperCase()==c);if(s){o.innerHTML=idCard(s.id);return}const d=D.dead.find(x=>x.tag.toUpperCase()==c);if(d){o.innerHTML=`<div class="alert red">☠️<span>${esc(d.tag)} مسجل نافق بتاريخ ${d.date} (${esc(d.reason)}).</span></div>`;return}const p=D.sheep.filter(x=>x.tag.toUpperCase().includes(c));o.innerHTML=p.length?`<div class="card"><h3>نتائج مشابهة</h3>${p.map(x=>`<button class="row hr" data-a="id" data-v="${x.id}"><b>${esc(x.tag)}</b><i>‹</i></button>`).join('')}</div>`:'<p class="empty">ما لقينا رأس بهذا الكود. تأكد منه وجرّب مرة ثانية.</p>'},
+scan:async()=>{if(!('BarcodeDetector' in window))return toast('المسح غير مدعوم هنا، اكتب الكود');try{const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}),v=$('#vid'),stop=()=>{st.getTracks().forEach(t=>t.stop());window.stopCam=null};window.stopCam=stop;v.srcObject=st;v.hidden=false;await v.play();const bd=new BarcodeDetector({formats:['code_39','code_128']}),loop=async()=>{if(!document.contains(v))return stop();try{const r=await bd.detect(v);if(r.length){stop();v.hidden=true;$('#qc').value=r[0].rawValue;A.find();return}}catch(e){}setTimeout(loop,300)};loop()}catch(e){toast('الكاميرا غير متاحة، اكتب الكود')}},
+print:()=>window.print(),
+photo:v=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{const f=i.files[0];if(!f)return;const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=200;c.height=250;const x=c.getContext('2d'),r=Math.max(200/im.width,250/im.height);x.drawImage(im,(200-im.width*r)/2,(250-im.height*r)/2,im.width*r,im.height*r);D.sheep.find(s=>s.id==v).photo=c.toDataURL('image/jpeg',.7);save();openM(idCard(v))};im.src=URL.createObjectURL(f)};i.click()},
+addV:t=>form('تسجيل تطعيم',[['to','الرأس أو الشبك','select',t?[t]:[...PENS,...tags()]],['name','التطعيم أو العلاج','select',['الحمى القلاعية','جدري الأغنام','الحمى الوادية','التسمم المعوي','مضاد طفيليات','أخرى']],['date','تاريخ الجرعة','date',T()],['days','الجرعة القادمة بعد (يوم)','number',180]],d=>{const tg=PENS.includes(d.to)?D.sheep.filter(s=>s.pen==d.to).map(s=>s.tag):[d.to];tg.forEach(g=>D.vax.push({id:uid(),tag:g,name:d.name,date:d.date,next:add(d.date,+d.days)}));re();toast('سُجل التطعيم لـ '+tg.length+' رأس')}),
+addFd:()=>form('تسجيل علف',[['pen','الشبك','select',PENS],['item','النوع','select',['شعير','برسيم','نخالة','علف مركز','تبن']],['kg','الكمية (كجم)','number'],['cost','التكلفة (ر.س)','number'],['date','التاريخ','date',T()]],d=>{D.feed.push({id:uid(),...d,kg:+d.kg,cost:+d.cost});re()}),
+delFd:v=>{D.feed=D.feed.filter(x=>x.id!=v);re('تم حذف السجل')},
+rep:()=>{const s=stats();openM(`<h3>كشف مراح بتاريخ ${T()}</h3><p>الأحياء ${s.al} | الدفيع ${s.pg} | النفوق ${s.dd} (${s.rate}%) | الصافي ${fm(s.sales-s.exp)} ر.س</p>${tbl(D.sheep,['tag','type','pen','status'],['الرقم','السلالة','الشبك','الحالة'])}<div class="toolbar noprint"><button class="btn" data-a="print">🖨 طباعة أو حفظ PDF</button></div>`)},
+bk:()=>{openM(`<h3>نسخة احتياطية</h3><p style="margin-bottom:8px">انسخ النص وخزنه في ملاحظاتك. للاستعادة الصقه هنا واضغط استعادة.</p><textarea id="bkt" style="width:100%;height:150px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:8px"></textarea><div class="toolbar"><button class="btn" id="b1">📋 نسخ</button><button class="btn" id="b2">♻️ استعادة</button></div>`);const t=$('#bkt');t.value=JSON.stringify(D);$('#b1').onclick=()=>{t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand('copy')}toast('تم النسخ')};$('#b2').onclick=()=>{try{const n=JSON.parse(t.value);if(!n.sheep)throw 0;D=n;D.vax=D.vax||[];D.feed=D.feed||[];D.hist=D.hist||[];re();closeM();toast('تمت الاستعادة')}catch(e){toast('النص غير صالح')}}}};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a]){snap=JSON.stringify(D);A[b.dataset.a](b.dataset.v)}});
+$('#go').onclick=()=>{$('#splash').classList.add('off');go('dash')};
+$('#theme').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
+try{const z=+localStorage.getItem('marah_fs')||0;document.documentElement.style.fontSize=[16,18,20][z]+'px';document.documentElement.dataset.fs=z}catch(e){}
+initSync();
+save();
+go('dash');
+</script>
+</body>
+</html>
