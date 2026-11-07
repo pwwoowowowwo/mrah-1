@@ -117,6 +117,7 @@ header{padding-inline-end:170px}
 .task{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:14px;border-radius:14px;background:var(--soft);margin-bottom:8px;font-weight:500;font-size:1.05rem}.task b{font-size:1.5rem;font-weight:400}.task span{flex:1}.task.bad{background:var(--dng);color:#fff}
 .hr{width:100%;text-align:start;gap:12px;padding:13px 4px}
 @media(min-width:820px){#fab{bottom:24px;left:24px}}
+#gate{position:fixed;inset:0;z-index:950;background:#10301c;color:#f3efe0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}#gate .logo{font-size:56px}#gate h1{font-size:2rem}#gate code{background:rgba(255,255,255,.12);padding:8px 14px;border-radius:10px;word-break:break-all;direction:ltr;font-size:.95rem}#gate .btn{background:#e9b44c;color:#10301c}
 </style>
 </head>
 <body>
@@ -129,15 +130,13 @@ header{padding-inline-end:170px}
 <div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-const $=s=>document.querySelector(s),K='marah_v2',PENS=['شبك الولاد والدفيع','شبك الفحول','شبك التسمين والبيع','شبك الطلي'],COL=['#3f9d62','#e9b44c','#4aa3c7','#d9694a','#9a8be0'];
+let K='marah_v2';
+const $=s=>document.querySelector(s),PENS=['شبك الولاد والدفيع','شبك الفحول','شبك التسمين والبيع','شبك الطلي'],COL=['#3f9d62','#e9b44c','#4aa3c7','#d9694a','#9a8be0'];
 const T=()=>new Date().toISOString().slice(0,10),add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)},dl=d=>Math.ceil((new Date(d)-new Date(T()))/864e5),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fm=n=>Number(n).toLocaleString('en');
-const seed=()=>({sheep:[['N-101','نعيمي','أنثى',0,'دفيع مؤكد'],['N-102','نعيمي','أنثى',0,'دفيع مؤكد'],['N-103','نعيمي','أنثى',0,'دفيع مؤكد'],['H-201','حري','ذكر',1,'فحل ضارب'],['T-301','نعيمي','ذكر',2,'جاهز للبيع'],['T-302','نجدي','ذكر',2,'تسمين'],['W-401','نعيمي','أنثى',3,'طلي نامي']].map(a=>({id:uid(),tag:a[0],type:a[1],gender:a[2],pen:PENS[a[3]],status:a[4]})),
-breed:[['N-101',-100],['N-102',-40],['N-103',-140]].map(a=>({id:uid(),tag:a[0],sire:'H-201',date:add(T(),a[1]),due:add(T(),a[1]+150)})),
-weights:[['T-301',38,-30],['T-301',44,-1],['T-302',36,-30],['T-302',41,-1]].map(a=>({id:uid(),tag:a[0],kg:a[1],date:add(T(),a[2])})),
-dead:[{id:uid(),tag:'M-99',reason:'التهاب رئوي',date:add(T(),-20)}],
-fin:[{id:uid(),type:'sale',desc:'بيع طلي نعيمي',amount:1400,date:add(T(),-10)},{id:uid(),type:'expense',desc:'شراء شعير',amount:500,date:add(T(),-8)}]});
-let D;try{D=JSON.parse(localStorage.getItem(K))}catch(e){}D=D||seed();D.vax=D.vax||[];D.feed=D.feed||[];D.hist=D.hist||[];
+const seed=()=>({sheep:[],breed:[],weights:[],dead:[],fin:[],vax:[],feed:[],hist:[],m2:1,m3:1});
+let D;try{let bk=null,bt=-1;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k=='marah_v2'||(k.startsWith('marah_v3_')&&!k.endsWith('_t'))){const t=+localStorage.getItem(k+'_t')||0;if(t>bt){bt=t;bk=k}}}if(bk)D=JSON.parse(localStorage.getItem(bk))}catch(e){}D=D||seed();D.vax=D.vax||[];D.feed=D.feed||[];D.hist=D.hist||[];
 if(!D.m3){D.m3=1;const w=D.sheep.find(x=>x.tag=='W-401'&&!x.since);if(w)w.since=add(T(),-260)}
+if(!D.clean){D.clean=1;const DM=['N-101','N-102','N-103','H-201','T-301','T-302','W-401'],nd=x=>!DM.includes(x.tag);D.sheep=D.sheep.filter(nd);['breed','weights','vax','hist'].forEach(k=>D[k]=(D[k]||[]).filter(nd));D.dead=D.dead.filter(x=>x.tag!='M-99');D.fin=D.fin.filter(x=>!['بيع طلي نعيمي','شراء شعير'].includes(x.desc));D.feed=D.feed.filter(x=>!(x.item=='شعير'&&x.kg==200&&x.cost==500)&&!(x.item=='برسيم'&&x.kg==150&&x.cost==300))}
 if(!D.m2){D.m2=1;if(!D.vax.length&&!D.feed.length){D.sheep.forEach((s,i)=>D.vax.push({id:uid(),tag:s.tag,name:'الحمى القلاعية',date:add(T(),-170-i*5),next:i==2?add(T(),-5):add(T(),30+i*20)}));D.feed=[{id:uid(),pen:PENS[2],item:'شعير',kg:200,cost:500,date:add(T(),-8)},{id:uid(),pen:PENS[0],item:'برسيم',kg:150,cost:300,date:add(T(),-3)}]}}
 let saved=true;const save=()=>{try{localStorage.setItem(K,JSON.stringify(D));localStorage.setItem(K+'_t',Date.now());saved=true}catch(e){saved=false;toast('⚠️ تعذر الحفظ على الجهاز، صدّر نسخة إكسل')}push()};addEventListener('pagehide',()=>save());
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on'),2200)};
@@ -238,13 +237,11 @@ let DB=null,SYNC=false,CAN=null,pt,lastJ={},RM={},hy=new Set();
 const strip=k=>k=='sheep'?D.sheep.map(({photo,...r})=>r):D[k]||[];
 const applyRemote=(k,r)=>{const ph={};if(k=='sheep')D.sheep.forEach(a=>{if(a.photo)ph[a.id]=a.photo});D[k]=JSON.parse(JSON.stringify(r));if(k=='sheep')D.sheep.forEach(a=>{if(ph[a.id])a.photo=ph[a.id]});try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
 const refresh=()=>{const a=document.activeElement;if(!a||!/INPUT|TEXTAREA|SELECT/.test(a.tagName))go(cur)};
-const push=()=>{if(!DB||!SYNC||hy.size<SEC.length)return;clearTimeout(pt);pt=setTimeout(()=>SEC.forEach(x=>{const k=x[0],rows=strip(k),j=JSON.stringify(rows);if(j==lastJ[k])return;if(j.length>200000)return toast('⚠️ قسم '+x[1]+' كبير جداً للمزامنة، صدّر إكسل ونظّف القديم');lastJ[k]=j;DB.doc('sync/'+k).set({rows,t:Date.now()}).catch(e=>{lastJ[k]=JSON.stringify(RM[k]||[]);applyRemote(k,RM[k]||[]);refresh();toast('تعذرت المزامنة: تأكد أن عندك صلاحية تعديل')})}),700)};
-const initSync=async()=>{try{DB=await window.claude.use('db')}catch(e){}if(!DB)return;try{const u=await window.claude.use('user');CAN=u?await u.can('data.write'):null}catch(e){}
-DB.doc('sync/meta').onSnapshot(x=>{SYNC=x.exists;if(cur=='more')refresh()},()=>{});
-SEC.forEach(x=>{const k=x[0];DB.doc('sync/'+k).onSnapshot(d=>{hy.add(k);if(!d.exists)return;const r=d.data().rows||[],j=JSON.stringify(r);RM[k]=r;if(j==lastJ[k])return;lastJ[k]=j;applyRemote(k,r);refresh()},()=>{})})};
-const syncCard=()=>!DB?'':SYNC?`<div class="card"><h3>☁️ المزامنة شغالة</h3><p>أي تعديل منك أو من الراعي يظهر عند الكل. صلاحيتك: ${CAN===false?'قراءة فقط':'تعديل'}.</p><p style="color:var(--mut);font-size:.9rem;margin-top:6px">لإضافة الراعي: شارك رابط الصفحة معه من زر المشاركة في كلود وأعطه صلاحية مساهم. الصور تبقى على جهاز كل شخص.</p></div>`:`<div class="card"><h3>☁️ مزامنة بين الأجهزة</h3><p style="margin-bottom:10px;color:var(--mut)">ترفع بياناتك الحالية، ويشوفها الراعي ويسجل عليها من جواله.</p><button class="btn" data-a="syncOn" style="width:100%">فعّل المزامنة وارفع بياناتي</button></div>`;
+const push=()=>{if(!DB||!SYNC||hy.size<SEC.length)return;clearTimeout(pt);pt=setTimeout(()=>SEC.forEach(x=>{const k=x[0],rows=strip(k),j=JSON.stringify(rows);if(j==lastJ[k])return;if(j.length>200000)return toast('⚠️ قسم '+x[1]+' كبير جداً للمزامنة، صدّر إكسل ونظّف القديم');lastJ[k]=j;DB.doc('data/users/'+UID+'/'+k).set({rows,t:Date.now()}).catch(e=>{lastJ[k]=JSON.stringify(RM[k]||[]);applyRemote(k,RM[k]||[]);refresh();toast('تعذرت المزامنة: تأكد أن عندك صلاحية تعديل')})}),700)};
+let UID=null,OWNER=false,SUBR=null,SUBS=[],booted=false;
+const syncCard=()=>'';
 let cur='dash',first=true;
-function go(v){window.stopCam&&stopCam();cur=v;$('#nav').innerHTML=NAV.map(n=>`<button class="${n[0]==v?'on':''}" data-a="nav" data-v="${n[0]}"><b>${n[1]}</b>${n[2]}</button>`).join('');$('#view').innerHTML=V[v]();if(v=='find')$('#qc').onkeydown=e=>{if(e.key=='Enter')A.find()};if(v=='herd'){herdList();$('#q').oninput=$('#pf').onchange=herdList}
+function go(v){window.stopCam&&stopCam();cur=v;$('#nav').innerHTML=NAV.filter(n=>n[0]!='admin'||OWNER).map(n=>`<button class="${n[0]==v?'on':''}" data-a="nav" data-v="${n[0]}"><b>${n[1]}</b>${n[2]}</button>`).join('');$('#view').innerHTML=V[v]();if(v=='find')$('#qc').onkeydown=e=>{if(e.key=='Enter')A.find()};if(v=='herd'){herdList();$('#q').oninput=$('#pf').onchange=herdList}
 document.querySelectorAll('[data-n]').forEach(e=>{const n=+e.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/900);e.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)});scrollTo(0,0)}
 let snap='';
 const undo=(m,o)=>{const t=$('#toast');t.innerHTML=m+' <button id="un" style="color:var(--gold);font-weight:700;margin-inline-start:10px">تراجع</button>';t.classList.add('on','u');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on','u'),6000);$('#un').onclick=()=>{D=JSON.parse(o);t.classList.remove('on','u');re()}};
@@ -276,7 +273,6 @@ if(r=='حامل'){b.res='حامل';if(h)h.res='حامل';if(x)x.status='دفيع
 else if(r=='لم تلقح'){D.breed=D.breed.filter(y=>y.id!=id);if(h)h.res='لم تلقح';if(x)x.status='لم تلقح، تحتاج إعادة ضراب';re('سُجلت '+b.tag+' غير ملقحة'+(x&&x.tries>=4?' (وصلت 4 ضرابات)':''))}
 else{b.chk=add(T(),14);re('تم التأجيل 14 يوم')}},
 edS:v=>{const x=D.sheep.find(y=>y.id==v);form('تعديل '+x.tag,[['since','تاريخ دخول المراح','date',x.since||T()],['buy','سعر الشراء','number',x.buy||'','o']],d=>{x.since=d.since;if(d.buy)x.buy=+d.buy;re('تم التعديل')})},
-syncOn:async()=>{if(!DB)return toast('المزامنة غير متاحة هنا');try{for(const x of SEC){const k=x[0],rows=strip(k);lastJ[k]=JSON.stringify(rows);RM[k]=rows;await DB.doc('sync/'+k).set({rows,t:Date.now()})}await DB.doc('sync/meta').set({on:true,t:Date.now()});SYNC=true;toast('☁️ تم تفعيل المزامنة');go('more')}catch(e){toast('تعذر التفعيل: تحتاج صلاحية تعديل')}},
 ask:()=>{const q=$('#aq').value.trim();if(q)stream('السؤال: '+q)},
 week:()=>stream('حلل المراح هالأسبوع: ملخص الحال بسطرين، ثم أهم 3 أولويات مرتبة بالعمل المطلوب، ثم المخاطر، ثم فرصة بيع أو توفير. مختصر وواضح.'),
 parse:async()=>{const t=$('#at').value.trim();if(!t)return;const sm=await ai();if(!sm)return aout('الذكاء غير متاح في هذي النسخة من الصفحة.');aout('أقرأ كلامك…');try{const r=await sm.json(`حوّل كلام مربي الأغنام إلى عمليات. أرجع JSON فقط: مصفوفة عناصر {act,...}. الأنواع: weight{tag,kg}, sell{tag,amount}, dead{tag,reason}, birth{tag,n,gender:"ذكر"|"أنثى"}, vax{to,name,days}, feed{pen,item,kg,cost}, add{tag,type,gender,pen,status}, breed{tag,sire}, fin{type:"sale"|"expense",desc,amount}. الأرقام المسجلة: ${tags().join(',')}. الأشباك: ${PENS.join(',')}. طابق الأرقام بالأقرب (n101 = N-101). تجاهل ما لا تفهمه.\nالكلام: ${t}`);ACT=(Array.isArray(r)?r:[]).filter(a=>a&&a.act);aout(ACT.length?'<b>فهمت هذي العمليات:</b>'+ACT.map(a=>'\n• '+esc(dsc(a))).join('')+'\n<button class="btn" data-a="runAct" style="width:100%;margin-top:10px">نفّذ الكل</button>':'ما فهمت عملية واضحة، جرّب صياغة ثانية.')}catch(e){aerr(e)}},
@@ -307,7 +303,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&
 $('#go').onclick=()=>{$('#splash').classList.add('off');go('dash')};
 $('#theme').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
 try{const z=+localStorage.getItem('marah_fs')||0;document.documentElement.style.fontSize=[16,18,20][z]+'px';document.documentElement.dataset.fs=z}catch(e){}
-initSync();
 save();
 go('dash');
 </script>
