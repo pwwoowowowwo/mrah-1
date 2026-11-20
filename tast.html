@@ -345,6 +345,27 @@ html,body,header,.card,.kpi,nav,.mrow,.btn{transition:background-color .35s,colo
 .gsy{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:1rem;font-weight:700;line-height:1;vertical-align:middle}
 .gm .gsy{color:var(--gm);background:color-mix(in srgb,var(--gm) 16%,transparent)}
 .gf .gsy{color:var(--gf);background:color-mix(in srgb,var(--gf) 16%,transparent)}
+
+/* ===== v6: fixes from device screenshots ===== */
+.hero svg{display:block}
+.hero{align-items:center}
+.kpi:is(button)::after{display:none}
+body:not(:has(#nav button.on[data-v="dash"])) .hgreet{display:none}
+main:has(>h2.sh){padding-top:20px}
+h2.sh{font-size:1.4rem;margin:2px 4px 12px}
+.task{background:var(--soft);color:var(--ink);border-radius:18px;padding:9px 12px 9px 10px;gap:10px;font-size:.92rem;font-weight:600;line-height:1.5;margin-bottom:7px;border-inline-start:5px solid var(--tl)}
+.task b{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:1.15rem;background:var(--surf);box-shadow:0 3px 8px rgba(0,0,0,.06)}
+.task>i{font-style:normal;color:var(--mut);font-size:1.2rem}
+.task.bad,.task.stg-red{background:color-mix(in srgb,var(--dng) 10%,var(--surf));color:var(--ink);border-inline-start-color:var(--dng)}
+.task.bad b,.task.stg-red b{background:color-mix(in srgb,var(--dng) 20%,var(--surf))}
+.task.stg-yellow{background:color-mix(in srgb,#e6b422 14%,var(--surf));color:var(--ink);border-inline-start-color:#e6b422}
+.task.stg-yellow b{background:color-mix(in srgb,#e6b422 24%,var(--surf))}
+.task.stg-orange{background:color-mix(in srgb,#e8772e 12%,var(--surf));color:var(--ink);border-inline-start-color:#e8772e}
+.task.stg-orange b{background:color-mix(in srgb,#e8772e 22%,var(--surf))}
+.task.stg-green{background:color-mix(in srgb,#2e9d5a 12%,var(--surf));color:var(--ink);border-inline-start-color:#2e9d5a}
+.task.stg-green b{background:color-mix(in srgb,#2e9d5a 22%,var(--surf))}
+.task:active{scale:.98}
+.card h3 .tag{background:var(--soft);color:var(--mut);font-weight:700;margin-inline-start:4px}
 </style>
 </head>
 <body>
