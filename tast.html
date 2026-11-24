@@ -437,42 +437,48 @@ linear-gradient(var(--soft),var(--soft)) 0 366px/100% 120px no-repeat}
 @keyframes skel{from{opacity:.4}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#view:empty::before{animation:none}}
 /* ===== Android compact sizing ===== */
-html{font-size:12px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-header{padding:calc(6px + env(safe-area-inset-top,0px)) 14px 10px!important;border-radius:0 0 24px 24px}
-.brand{font-size:1.5rem!important;gap:6px}
-#hsrch{width:124px;height:34px}#hsrch::after{font-size:.78rem}
-#theme{width:34px;height:34px;font-size:14px}
-.ib{width:34px;height:34px;font-size:15px}
-main{padding:12px 12px 104px}
-.hgreet{margin:12px auto 2px;padding:0 14px;font-size:1.25rem}
-.hgreet::before{height:30px}
+html{font-size:clamp(9px,calc(100vw/33),13px);-webkit-text-size-adjust:none;text-size-adjust:none}
+header{padding:calc(0.5rem + env(safe-area-inset-top,0rem)) 1.17rem 0.833rem!important;border-radius:0 0 2rem 2rem}
+.brand{font-size:1.5rem!important;gap:0.5rem}
+#hsrch{width:10.3rem;height:2.83rem}#hsrch::after{font-size:.78rem}
+#theme{width:2.83rem;height:2.83rem;font-size:1.17rem}
+.ib{width:2.83rem;height:2.83rem;font-size:1.25rem}
+main{padding:1rem 1rem 8.67rem}
+.hgreet{margin:1rem auto 0.167rem;padding:0 1.17rem;font-size:1.25rem}
+.hgreet::before{height:2.5rem}
 .hgreet::after{font-size:.78rem}
-.card,.kpi{border-radius:20px}
-.card{padding:12px;margin-bottom:10px}
-.card h3{font-size:1.05rem;padding-bottom:7px;margin-bottom:8px}
-.hero{grid-template-columns:1fr 88px;padding:12px 14px 24px;border-radius:22px;margin-bottom:10px}
+.card,.kpi{border-radius:1.67rem}
+.card{padding:1rem;margin-bottom:0.833rem}
+.card h3{font-size:1.05rem;padding-bottom:0.583rem;margin-bottom:0.667rem}
+.hero{grid-template-columns:1fr 7.33rem;padding:1rem 1.17rem 2rem;border-radius:1.83rem;margin-bottom:0.833rem}
 .hero h2{font-size:1rem}
 .hero p{font-size:.75rem}
 .hero .big{font-size:2.3rem}
-.hero svg{width:88px;height:88px}
-.hero .legend button{font-size:.68rem;padding:2px 8px}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
-.kpi{padding:10px 12px}
+.hero svg{width:7.33rem;height:7.33rem}
+.hero .legend button{font-size:.68rem;padding:0.167rem 0.667rem}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(9.17rem,1fr));gap:0.667rem}
+.kpi{padding:0.833rem 1rem}
 .kpi .num{font-size:1.4rem}
 .kpi small{font-size:.7rem}
-.btn{padding:10px 14px;font-size:.95rem;border-radius:14px}
-input,select{padding:9px 11px;border-radius:13px}
-.mi{width:40px;height:40px;font-size:1.2rem}
-.mrow{padding:9px;margin-bottom:7px;border-radius:16px}
-.task{padding:11px;font-size:.95rem}
-nav{inset-inline:8px;bottom:calc(6px + env(safe-area-inset-bottom,0px));border-radius:24px}
-nav button{padding:7px 0 8px;font-size:.62rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{padding:0.833rem 1.17rem;font-size:.95rem;border-radius:1.17rem}
+input,select{padding:0.75rem 0.917rem;border-radius:1.08rem}
+.mi{width:3.33rem;height:3.33rem;font-size:1.2rem}
+.mrow{padding:0.75rem;margin-bottom:0.583rem;border-radius:1.33rem}
+.task{padding:0.917rem;font-size:.95rem}
+nav{inset-inline:0.667rem;bottom:calc(0.5rem + env(safe-area-inset-bottom,0rem));border-radius:2rem}
+nav button{padding:0.583rem 0 0.667rem;font-size:.62rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 nav button b{font-size:1.2rem}
-.nb{font-size:.6rem;min-width:15px;padding:0 4px}
-#fab{width:52px;height:52px;font-size:2rem;border-width:5px;bottom:calc(28px + env(safe-area-inset-bottom,0px))}
-.sheet{padding:16px;border-radius:22px 22px 0 0}
+.nb{font-size:.6rem;min-width:1.25rem;padding:0 0.333rem}
+#fab{width:4.33rem;height:4.33rem;font-size:2rem;border-width:0.417rem;bottom:calc(2.33rem + env(safe-area-inset-bottom,0rem))}
+.sheet{padding:1.33rem;border-radius:1.83rem 1.83rem 0 0}
 .sheet h3{font-size:1.1rem}
-#toast{bottom:70px}
+#toast{bottom:5.83rem}
+
+/* fluid: scale everything with screen width */
+.hero svg{width:7.3rem;height:7.3rem}
+.hero{grid-template-columns:1fr 7.3rem}
+@media(max-width:340px){.kpis{grid-template-columns:repeat(2,1fr)}.hgreet{font-size:1.1rem}}
+@media(min-width:600px){html{font-size:13px}main{max-width:720px}}
 </style>
 </head>
 <body>
@@ -525,10 +531,10 @@ if(urg)ch.push(['🔴',urg+' عاجل','bad']);if(O.red.kids.length)ch.push(['�
 const tile=(l,v,a,x,cls)=>`<button class="kpi ${cls||''}" data-a="${a}" data-v="${x}"><small>${l}</small><div class="num"${/^\d+$/.test(''+v)?` data-n="${v}"`:''}>${/^\d+$/.test(''+v)?0:v}</div></button>`;
 return `${D.sheep.length?'':taskCard()}<div class="hero"><div><h2>حال المراح اليوم</h2><p>إجمالي الحلال الحي</p><div class="big num" data-n="${s.al}">0</div><div class="legend">${pe.map((p,i)=>`<button data-a="pen" data-v="${esc(p[0])}"><i style="background:${COL[i%COL.length]}"></i>${esc(p[0].replace('شبك ',''))} ${p[1]}</button>`).join('')}</div></div><svg viewBox="0 0 36 36" role="img" aria-label="توزيع الحلال على الأشباك"><circle r="15.9" cx="18" cy="18" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4.5"/>${arcs}</svg></div>
 <div class="achips">${ch.map(c=>`<button class="achip ${c[2]}" data-a="nav" data-v="tasks">${c[0]} ${c[1]}</button>`).join('')||'<span class="achip ok">✅ لا تنبيهات عاجلة</span>'}${tk.length?`<button class="achip" data-a="nav" data-v="tasks">كل المهام (${tk.length}) ‹</button>`:''}</div>
-<div class="kpis">${tile('الحلال الحي',s.al,'k','alive')}${tile('الدفيع',s.pg,'k','preg')}${tile('جاهز للبيع',ready,'k','sale')}${tile('ولادات قريبة',soon,'nav','track')}${tile('المواليد',kidsN,'nav','tasks')}${tile('أمهات في العزل',isoN,'moms','x')}${tile('نسبة الهلاك',s.rate+'%','k','rate',+s.rate>3?'bad':'')}${tile('صافي الربح',fm(s.net),'k','fin','gold')}</div>${stageCard()}`};
+<div class="kpis">${tile('الحلال الحي',s.al,'k','alive')}${tile('الدفيع',s.pg,'k','preg')}${tile('جاهز للبيع',ready,'k','sale')}${tile('ولادات قريبة',soon,'nav','track')}${tile('متوسط الإنتاج (شهر)',herdAvg().avg==null?'-':herdAvg().avg,'nav','track')}${tile('المواليد',kidsN,'nav','tasks')}${tile('أمهات في العزل',isoN,'moms','x')}${tile('نسبة الهلاك',s.rate+'%','k','rate',+s.rate>3?'bad':'')}${tile('صافي الربح',fm(s.net),'k','fin','gold')}</div>${stageCard()}`};
 V.herd=()=>`<div class="toolbar"><input id="q" placeholder="ابحث برقم الرأس أو السلالة"><select id="penf"><option value="">كل الأشباك</option>${PENS.map(p=>`<option>${p}</option>`).join('')}</select>${multi()?`<select id="spf"><option value="">كل الأنواع</option>${spList().map(k=>`<option>${k}</option>`).join('')}</select>`:''}<select id="stf"><option value="">كل المراحل</option><option value="red">🔴 خطر</option><option value="yellow">🟡 حذر</option><option value="orange">🟠 نمو</option><option value="green">🟢 قريب الفطام</option></select><button class="btn" data-a="addS">+ إضافة رأس</button><button class="btn" data-a="saleB">📦 بيع جملة</button></div><div class="card" id="hl"></div>`;
 const herdList=()=>{const q=$('#q').value.trim(),p=$('#penf').value,r=D.sheep.filter(s=>(!q||(s.tag+s.type).includes(q))&&(!p||s.pen==p)&&(!$('#spf')||!$('#spf').value||(s.sp||'غنم')==$('#spf').value)&&(!$('#stf').value||((kidInfo(s)||{g:[]}).g[0])==$('#stf').value));$('#hl').innerHTML=r.length?r.map(s=>{const h=hs(s),ki=kidInfo(s);return `<button class="row hr ${s.gender=='ذكر'?'gm':'gf'}" data-a="id" data-v="${s.id}" style="${ki?'border-inline-start:6px solid '+ki.g[1]+';padding-inline-start:10px':''}"><span class="st ${h.c}" style="margin:0"><i></i></span><span style="flex:1"><b>${esc(s.tag)}</b>${dot(s)} ${esc(s.sp||'غنم')} ${esc(s.type)} <span class="gsy">${s.gender=='ذكر'?'♂':'♀'}</span><br><small style="color:var(--mut)">${esc(s.pen)} | ${esc(s.status)} | ${ageTxt(bdOf(s))}</small><br>${stgChip(s)}${isoChip(s)}</span><i>‹</i></button>`}).join(''):'<p class="empty">ما لقينا نتيجة. جرّب بحث ثاني أو اضغط + لإضافة رأس.</p>'};
-V.breed=()=>{const r=D.breed.map(b=>({...b,d:dl(b.due)})).sort((a,b)=>a.d-b.d);return `<div class="toolbar"><button class="btn" data-a="addB">+ تسجيل ضراب</button></div>${repeatCard()}${nurseryCard()}<p style="color:var(--mut);margin-bottom:10px">مدة الحمل حسب النوع: غنم وماعز 150 يوم، إبل 390 يوم، ويحسب البرنامج موعد الولادة تلقائياً.</p>${r.map(b=>`<div class="card"><div class="row" style="border:0;padding:0"><div><b style="font-size:1.2rem">${esc(b.tag)}</b> <span class="tag">الفحل ${esc(b.sire)}</span> <span class="tag">الولادة رقم ${birthsOf(D.sheep.find(x=>x.tag==b.tag))+1}</span></div><div>${(b.res||'حامل')=='انتظار'?`<button class="btn" data-a="chk" data-v="${b.id}">فحص الحمل</button>`:`<button class="btn" data-a="birth" data-v="${b.id}">تمت الولادة</button>`} <button class="mini" data-a="editB" data-v="${b.id}">✏️ تعديل</button> <button class="mini d" data-a="delB" data-v="${b.id}">🗑</button></div></div><div class="bar"><span style="width:${Math.min(100,Math.max(2,(1-b.d/Math.max(1,Math.round((new Date(b.due)-new Date(b.date))/864e5)))*100))}%"></span></div><small style="color:var(--mut)">${(b.res||'حامل')=='انتظار'?'⏳ فحص الحمل '+(dl(b.chk)<=0?'مستحق الحين':'بعد '+dl(b.chk)+' يوم')+' | ':''}ضراب ${b.date} | ولادة ${b.due} | ${b.d>0?'باقي '+b.d+' يوم':b.d==0?'اليوم':'متأخرة '+(-b.d)+' يوم'}</small></div>`).join('')||'<p class="empty">ما فيه ضراب مسجل.<br><button class="btn" data-a="addB">+ سجّل أول ضراب</button></p>'}`};
+V.breed=()=>{const r=D.breed.map(b=>({...b,d:dl(b.due)})).sort((a,b)=>a.d-b.d);return `<div class="toolbar"><button class="btn" data-a="addB">+ تسجيل ضراب</button></div>${lifeSummary()}${repeatCard()}${nurseryCard()}<p style="color:var(--mut);margin-bottom:10px">مدة الحمل حسب النوع: غنم وماعز 150 يوم، إبل 390 يوم، ويحسب البرنامج موعد الولادة تلقائياً.</p>${r.map(b=>`<div class="card"><div class="row" style="border:0;padding:0"><div><b style="font-size:1.2rem">${esc(b.tag)}</b> <span class="tag">الفحل ${esc(b.sire)}</span> <span class="tag">الولادة رقم ${birthsOf(D.sheep.find(x=>x.tag==b.tag))+1}</span></div><div>${(b.res||'حامل')=='انتظار'?`<button class="btn" data-a="chk" data-v="${b.id}">فحص الحمل</button>`:`<button class="btn" data-a="birth" data-v="${b.id}">تمت الولادة</button>`} <button class="mini" data-a="editB" data-v="${b.id}">✏️ تعديل</button> <button class="mini d" data-a="delB" data-v="${b.id}">🗑</button></div></div><div class="bar"><span style="width:${Math.min(100,Math.max(2,(1-b.d/Math.max(1,Math.round((new Date(b.due)-new Date(b.date))/864e5)))*100))}%"></span></div><small style="color:var(--mut)">${(b.res||'حامل')=='انتظار'?'⏳ فحص الحمل '+(dl(b.chk)<=0?'مستحق الحين':'بعد '+dl(b.chk)+' يوم')+' | ':''}ضراب ${b.date} | ولادة ${b.due} | ${bst(b)}</small></div>`).join('')||'<p class="empty">ما فيه ضراب مسجل.<br><button class="btn" data-a="addB">+ سجّل أول ضراب</button></p>'}`};
 V.growth=()=>{const by={};D.weights.slice().sort((a,b)=>a.date>b.date?1:-1).forEach(w=>(by[w.tag]=by[w.tag]||[]).push(w));const rows=Object.entries(by),mx=Math.max(1,...rows.map(r=>r[1].at(-1).kg));return `<div class="toolbar"><button class="btn" data-a="addW">+ تسجيل وزن</button><button class="btn" data-a="bulkQ">⚖️ وزن شبك كامل</button></div><div class="card"><h3>آخر وزن لكل رأس (كجم)</h3><div class="bars">${rows.map(r=>`<div>${r[1].at(-1).kg}<i style="height:${r[1].at(-1).kg/mx*80}%"></i>${esc(r[0])}</div>`).join('')||'<p class="empty">سجّل أول وزن.<br><button class="btn" data-a="addW">+ سجّل وزن</button></p>'}</div></div><div class="card"><h3>معدل النمو</h3>${rows.map(([t,w])=>{const f=w[0],l=w.at(-1),days=Math.max(1,(new Date(l.date)-new Date(f.date))/864e5),g=w.length>1?((l.kg-f.kg)/days*1000).toFixed(0):null;return `<div class="row"><b>${esc(t)}</b><span>${f.kg} ← ${l.kg} كجم</span><span class="tag">${g!==null?g+' جم/يوم':'وزن واحد'}</span></div>`}).join('')||'<p class="empty">لا توجد أوزان.</p>'}</div>`};
 V.loss=()=>`<div class="toolbar"><button class="btn" data-a="addD">+ تسجيل نفوق</button></div><div class="card">${D.dead.length?D.dead.map(d=>`<div class="row"><div><b>${esc(d.tag)}</b><br><small style="color:var(--mut)">${esc(d.reason)} | ${d.date}</small></div><button class="mini d" data-a="delD" data-v="${d.id}">🗑</button></div>`).join(''):'<p class="empty">الحمد لله، ما فيه نفوق مسجل.</p>'}</div>`;
 V.money=()=>{const s=stats(),mx=Math.max(1,s.sales,s.exp);return `<div class="kpis"><div class="kpi"><small>المبيعات</small><div class="num">${fm(s.sales)}</div></div><div class="kpi bad"><small>المصروفات (شاملة الأعلاف)</small><div class="num">${fm(s.exp)}</div></div><div class="kpi gold"><small>الصافي</small><div class="num">${fm(s.net)}</div></div></div><div class="card"><div class="bars"><div>${fm(s.sales)}<i style="height:${s.sales/mx*80}%"></i>مبيعات</div><div>${fm(s.exp)}<i style="height:${s.exp/mx*80}%;background:var(--dng)"></i>مصروفات</div></div></div><div class="toolbar"><button class="btn" data-a="addF">+ عملية جديدة</button></div><div class="card">${D.fin.slice().reverse().map(f=>`<div class="row"><div><b>${esc(f.desc)}</b><br><small style="color:var(--mut)">${f.date}</small></div><b style="color:${f.type=='sale'?'var(--pri)':'var(--dng)'}">${f.type=='sale'?'+':'-'}${fm(f.amount)} ر.س</b><button class="mini d" data-a="delF" data-v="${f.id}">🗑</button></div>`).join('')||'<p class="empty">ما فيه عمليات.<br><button class="btn" data-a="addF">+ أضف أول عملية</button></p>'}</div>`};
@@ -634,9 +640,9 @@ const isoDays=s=>s.sp=='إبل'?+CFG.isoC:+CFG.isoS;
 const isoLeft=s=>{if(s.pen!=PN.moms||!s.lastBirth)return null;const d=ageD(s.lastBirth);return d==null?null:isoDays(s)-d};
 const isoChip=s=>{const l=isoLeft(s);if(l==null)return '';return `<span class="stg" style="background:${l<=0?'#c4442e':l<=14?'#e8772e':'#2e6ca0'};color:#fff">🔒 ${l<=0?'انتهى العزل: انقلها لشبك الدفيع':'عزل: باقي '+dTxt(l)}</span>`};
 const CB=fields=>{fields.forEach(f=>{if(f[2]!='search')return;const inp=$('#fm [name='+f[0]+']'),ls=inp.parentElement.querySelector('.cbl'),draw=all=>{const q=all?'':inp.value.trim().toLowerCase(),it=f[3].filter(o=>!q||String(o).toLowerCase().includes(q));ls.innerHTML=it.length?it.map(o=>`<button type="button" data-v="${esc(o)}">${esc(o)}</button>`).join(''):'<div class="empty" style="padding:10px">لا يوجد مطابق</div>';ls.hidden=false};inp.onfocus=()=>draw(true);inp.oninput=()=>draw(false);ls.onclick=e=>{const b=e.target.closest('button');if(!b)return;inp.value=b.dataset.v;ls.hidden=true;inp.blur()}});$('#sheet').onclick=e=>{if(!e.target.closest('.cb'))$('#sheet').querySelectorAll('.cbl').forEach(l=>l.hidden=true)}};
-const birthStats=()=>{const ev=[],seen=new Set();D.hist.filter(h=>h.res=='ولدت'&&h.litter).forEach(h=>{ev.push({l:+h.litter,m:+h.mc||0,f:+h.fc||0});if(h.par!=null)seen.add(h.tag+'|'+h.par)});const g={};D.sheep.forEach(k=>{if(k.dam&&k.parity!=null){const key=k.dam+'|'+k.parity;if(seen.has(key))return;const e=g[key]=g[key]||{l:0,m:0,f:0};e.l++;k.gender=='ذكر'?e.m++:e.f++}});Object.values(g).forEach(x=>ev.push(x));const n=ev.length,tw=ev.filter(e=>e.l>=2).length,m=ev.reduce((a,e)=>a+e.m,0),f=ev.reduce((a,e)=>a+e.f,0),t=m+f,mp=t?Math.round(m/t*100):null;return{n,tw,twp:n?Math.round(tw/n*100):null,m,f,kids:t,mp,fp:mp==null?null:100-mp}};
+const birthStats=()=>{const ev=[],seen=new Set();D.hist.filter(h=>h.res=='ولدت'&&h.litter&&matB(h.bd)).forEach(h=>{ev.push({l:+h.litter,m:+h.mc||0,f:+h.fc||0});if(h.par!=null)seen.add(h.tag+'|'+h.par)});const g={};D.sheep.forEach(k=>{if(k.dam&&k.parity!=null&&matB(k.bd)){const key=k.dam+'|'+k.parity;if(seen.has(key))return;const e=g[key]=g[key]||{l:0,m:0,f:0};e.l++;k.gender=='ذكر'?e.m++:e.f++}});Object.values(g).forEach(x=>ev.push(x));const n=ev.length,tw=ev.filter(e=>e.l>=2).length,m=ev.reduce((a,e)=>a+e.m,0),f=ev.reduce((a,e)=>a+e.f,0),t=m+f,mp=t?Math.round(m/t*100):null;return{n,tw,twp:n?Math.round(tw/n*100):null,m,f,kids:t,mp,fp:mp==null?null:100-mp}};
 const penStats=p=>{const L=D.sheep.filter(x=>x.pen==p),m=L.filter(x=>x.gender=='ذكر').length,f=L.length-m,mp=L.length?Math.round(m/L.length*100):null;return{n:L.length,m,f,mp,fp:mp==null?null:100-mp}};
-const nurseryCard=()=>{const b=birthStats(),p=penStats(PN.kids),k=(l,v,sub)=>`<div class="kpi"><small>${l}</small><div class="num">${v}</div>${sub?`<small>${sub}</small>`:''}</div>`;return `<div class="card"><h3>🍼 ${PN.kids}</h3><div class="kpis" style="margin:0 0 6px">${k('الرؤوس في الشبك',p.n)}${k('ذكور',p.m,p.mp!=null?p.mp+'%':'')}${k('إناث',p.f,p.fp!=null?p.fp+'%':'')}${k('أمهات في العزل',D.sheep.filter(x=>x.pen==PN.moms).length)}</div><small style="color:var(--mut)">${b.n?`كل الولادات المسجلة (${b.n} ولادة، ${b.kids} مولود): توائم ${b.twp}% | ذكور ${b.mp}% | إناث ${b.fp}%`:'تظهر نسب التوائم والجنس بعد تسجيل ولادات بزر «تمت الولادة»'}</small></div>`};
+const nurseryCard=()=>{const b=birthStats(),p=penStats(PN.kids),k=(l,v,sub)=>`<div class="kpi"><small>${l}</small><div class="num">${v}</div>${sub?`<small>${sub}</small>`:''}</div>`;return `<div class="card"><h3>🍼 ${PN.kids}</h3><div class="kpis" style="margin:0 0 6px">${k('الرؤوس في الشبك',p.n)}${k('ذكور',p.m,p.mp!=null?p.mp+'%':'')}${k('إناث',p.f,p.fp!=null?p.fp+'%':'')}${k('أمهات في العزل',D.sheep.filter(x=>x.pen==PN.moms).length)}</div><small style="color:var(--mut)">${b.n?`الولادات التي مضى عليها 3 أشهر فقط (${b.n} ولادة، ${b.kids} مولود): توائم ${b.twp}% | ذكور ${b.mp}% | إناث ${b.fp}%`:'تظهر نسب التوائم والجنس بعد تسجيل ولادات بزر «تمت الولادة»'}</small></div>`};
 const mo=d=>d?(new Date(T())-new Date(d))/2592e6:0;
 const breedAdd=(tag,sire,date)=>{const s=D.sheep.find(x=>x.tag==tag),id=uid(),pv=D.breed.find(b=>b.tag==tag&&(b.res||'حامل')=='انتظار');if(pv){const h=D.hist.find(x=>x.id==pv.id);if(h)h.res='لم تلقح';D.breed=D.breed.filter(b=>b!==pv)}
 const n=(s&&s.tries||0)+1,gap=s&&s.lastB?Math.round((new Date(date)-new Date(s.lastB))/864e5):'';D.breed.push({id,tag,sire,date,due:add(date,SP[(s&&s.sp)||'غنم'].g),res:'انتظار',chk:add(date,CFG.chk)});D.hist.push({id,tag,sire,date,n,gap,res:'انتظار'});if(s){s.tries=n;s.lastB=date;s.status='ضراب بانتظار الفحص'}return 'ضراب رقم '+n+(gap?' (بعد '+gap+' يوم من السابق)':'')+(n>=4?' ⚠️ وصلت 4 ضرابات، مشكلة':'')+'. افحص الحمل بعد '+CFG.chk+' يوم'};
@@ -645,7 +651,7 @@ const prod=x=>x.lastBirth||D.sheep.some(k=>k.dam==x.tag)||D.hist.some(h=>h.tag==
 const probs=x=>{const r=[],pend=D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='انتظار');if(x.gender=='أنثى'){if(x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل'))r.push(['bad',x.tries+' ضرابات بدون حمل','فحص بيطري أو استبعاد']);if(x.since&&mo(x.since)>=SP[x.sp||'غنم'].m&&!prod(x)&&!preg(x)&&!pend)r.push(['bad','مضى '+Math.floor(mo(x.since))+' أشهر بالمراح بدون ولادة','بيع أو استبدال']);if(x.lastBirth&&-dl(x.lastBirth)>SP[x.sp||'غنم'].o&&!preg(x)&&!pend)r.push(['warn','مفتوحة '+(-dl(x.lastBirth))+' يوم منذ آخر ولادة','فحص وإعادة ضراب'])}else if((x.status||'').includes('فحل')&&x.since&&mo(x.since)>=SP[x.sp||'غنم'].m&&!D.hist.some(h=>h.sire==x.tag&&-dl(h.date)<=240)&&!D.breed.some(b=>b.sire==x.tag))r.push(['warn','فحل بدون ضراب مسجل منذ '+SP[x.sp||'غنم'].m+' أشهر','قيّم قدرته أو استبدله']);
 const w=lst(D.weights,x.tag);if(w.length>1&&x.gender=='ذكر'&&!(x.status||'').includes('فحل')){const g=(w.at(-1).kg-w[0].kg)/Math.max(1,(new Date(w.at(-1).date)-new Date(w[0].date))/864e5)*1000;if(g<SP[x.sp||'غنم'].gw)r.push(['warn','نمو بطيء '+Math.round(g)+' جم/يوم','راجع العلف أو بع مبكراً'])}return r};
 const bad=()=>D.sheep.map(x=>({s:x,p:probs(x)})).filter(x=>x.p.length);
-const repeatCard=()=>{const r=D.sheep.filter(x=>x.tries>=2);if(!r.length)return '';return `<div class="card"><h3>إعادة الضراب</h3>${r.map(x=>{const h=D.hist.filter(y=>y.tag==x.tag).slice(-x.tries),pr=x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل');return `<div class="row"><div><b>${esc(x.tag)}</b> <span class="tag">${x.tries} ضرابات</span><br><small style="color:var(--mut)">${h.map(y=>y.gap?'بعد '+y.gap+' يوم':'الأول').join(' ← ')}</small></div>${pr?'<span class="tag" style="background:var(--dng);color:#fff">مشكلة</span>':''}</div>`}).join('')}</div>`};
+const repeatCard=()=>{const r=D.sheep.filter(x=>x.tries>=2);if(!r.length)return '';return `<div class="card"><h3>إعادة الضراب</h3>${r.map(x=>{const h=D.hist.filter(y=>y.tag==x.tag&&!y.past).slice(-x.tries),pr=x.tries>=4&&!D.breed.some(b=>b.tag==x.tag&&(b.res||'حامل')=='حامل');return `<div class="row"><div><b>${esc(x.tag)}</b> <span class="tag">${x.tries} ضرابات</span><br><small style="color:var(--mut)">${h.map(y=>y.gap?'بعد '+y.gap+' يوم':'الأول').join(' ← ')}</small></div>${pr?'<span class="tag" style="background:var(--dng);color:#fff">مشكلة</span>':''}</div>`}).join('')}</div>`};
 V.prod=()=>{const L=bad();return `<div class="card"><h3>الحلال غير المنتج</h3><p style="color:var(--mut);margin-bottom:8px">يفحص تلقائياً: 4 ضرابات بدون حمل، مدة طويلة بدون ولادة (8 أشهر للغنم والماعز و24 للإبل)، فترة مفتوحة طويلة، فحل بدون ضراب، وتسمين بطيء.</p>${L.length?L.map(({s:x,p})=>`<div class="row" style="align-items:flex-start"><div style="flex:1"><b>${esc(x.tag)}</b> <span class="tag">تكلفتها ${fm(Math.round((+x.buy||0)+feedPer(x.pen)))} ر.س</span>${p.map(y=>`<div class="alert ${y[0]=='bad'?'red':''}" style="margin:6px 0 0">${y[0]=='bad'?'⚠️':'🔸'}<span>${y[1]}<br><small>${y[2]}</small></span></div>`).join('')}</div><div><button class="mini" data-a="id" data-v="${x.id}">بطاقة</button> <button class="mini" data-a="sell" data-v="${x.id}">بيع</button></div></div>`).join(''):'<p class="empty">✅ ما فيه حلال غير منتج حالياً.</p>'}</div>${repeatCard()}`};
 let pt,lastJ={},hydrated=false;
 const strip=k=>k=='sheep'?D.sheep.map(({photo,...r})=>r):D[k]||[];
@@ -824,5 +830,29 @@ const man={name:'مَراح | إدارة الحلال',short_name:'مراح',lan
 L('manifest',{href:URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}))});
 [['apple-mobile-web-app-capable','yes'],['mobile-web-app-capable','yes'],['apple-mobile-web-app-title','مراح'],['apple-mobile-web-app-status-bar-style','default']].forEach(([n,v])=>{const m=document.createElement('meta');m.name=n;m.content=v;h.appendChild(m)})}catch(e){}
 })();
+</script>
+
+<script>
+const matB=d=>!d||(Date.now()-Date.parse(String(d).slice(0,10)))/864e5>=90;
+const bst=b=>{const el=-dl(b.date);return (b.res||'حامل')=='انتظار'?`<b>مضى ${el} يوم من الضراب</b>`:`مضى ${el} يوم | <b>${b.d>0?'باقي '+b.d+' يوم عن الولادة':b.d==0?'الولادة اليوم':'متأخرة '+(-b.d)+' يوم'}</b>`};
+const birthsList=tag=>{const s=D.sheep.find(x=>x.tag==tag),m=new Map();
+D.hist.filter(h=>h.tag==tag&&h.res=='ولدت'&&h.bd).forEach(h=>m.set(h.bd,{d:h.bd,n:+h.litter||1}));
+D.sheep.filter(k=>k.dam==tag&&k.bd).forEach(k=>{if(!m.has(k.bd))m.set(k.bd,{d:k.bd,n:0});if(!D.hist.some(h=>h.tag==tag&&h.bd==k.bd&&h.litter))m.get(k.bd).n++});
+if(s&&s.lastBirth&&!m.has(s.lastBirth))m.set(s.lastBirth,{d:s.lastBirth,n:1});
+return [...m.values()].sort((a,b)=>a.d>b.d?1:-1)};
+const gapsOf=tag=>{const L=birthsList(tag);return L.slice(1).map((x,i)=>{const dd=dl(x.d)-dl(L[i].d);return{from:L[i].d,to:x.d,days:-(-dd),mo:+(dd/30.44).toFixed(1)}})};
+const avgOf=a=>a.length?+(a.reduce((t,x)=>t+x,0)/a.length).toFixed(1):null;
+const ewes=()=>D.sheep.filter(x=>x.gender=='أنثى');
+const herdAvg=()=>{const g=[];let e=0;ewes().forEach(x=>{const q=gapsOf(x.tag);if(q.length){e++;g.push(...q.map(y=>y.mo))}});return{avg:avgOf(g),n:g.length,e}};
+const fertStats=()=>{const H=D.hist.filter(h=>!h.past&&h.date&&['حامل','ولدت','لم تلقح'].includes(h.res)),ok=h=>h.res!='لم تلقح',pc=a=>a.length?Math.round(a.filter(ok).length/a.length*100):null,F=H.filter(h=>(h.n||1)==1),mo={};
+H.forEach(h=>{const k=String(h.date).slice(0,7);(mo[k]=mo[k]||[]).push(h)});
+return{all:pc(H),n:H.length,first:pc(F),rep:D.hist.filter(h=>!h.past&&(h.n||1)>=2).length,months:Object.keys(mo).sort().slice(-6).map(k=>[k,pc(mo[k]),mo[k].length])}};
+const lifeSummary=()=>{const a=herdAvg(),f=fertStats(),b=birthStats(),k=(l,v,sub)=>`<div class="kpi"><small>${l}</small><div class="num">${v}</div>${sub?`<small>${sub}</small>`:''}</div>`;
+return `<div class="card"><h3>📊 مؤشرات التربية</h3><div class="kpis" style="margin:0 0 6px">${k('متوسط الفترة بين الولادات',a.avg==null?'-':a.avg+' شهر',a.n?a.n+' فترة | '+a.e+' شاة':'تحتاج ولادتين لشاة')}${k('نسبة الخصوبة',f.all==null?'-':f.all+'%',f.n?'رد الضراب: '+f.rep:'')}${k('نسبة التوائم',b.twp==null?'-':b.twp+'%','بعد 3 أشهر من الولادة')}</div>${f.months.length?`<small style="color:var(--mut)">الخصوبة شهرياً (ترتفع وتنزل مع الرد):</small>${f.months.map(m=>`<div class="row" style="padding:4px 0"><span>${m[0]}</span><div class="bar" style="flex:1;margin:0 8px"><span style="width:${m[1]||0}%"></span></div><b>${m[1]}%</b></div>`).join('')}`:''}</div>`};
+SUB.track.splice(1,0,['life','الولادات والإنتاج']);
+V.life=()=>{const a=herdAvg(),L=ewes().map(x=>({x,b:birthsList(x.tag),g:gapsOf(x.tag)})).filter(r=>r.b.length).sort((p,q)=>q.b.length-p.b.length);
+return `<div class="toolbar"><button class="btn" data-a="pastB">+ تسجيل ولادة سابقة</button></div><div class="card" style="text-align:center"><small style="color:var(--mut)">المتوسط الإجمالي للقطيع</small><div class="num" style="font-size:2.6rem;font-weight:700;color:var(--pri)">${a.avg==null?'-':a.avg}<small> شهر</small></div><small style="color:var(--mut)">بين كل ولادتين متتاليتين</small></div>`+(L.map(r=>{const m=avgOf(r.g.map(y=>y.mo));return `<div class="card"><div class="row" style="border:0;padding:0"><div><b style="font-size:1.2rem">${esc(r.x.tag)}</b> <span class="tag">${r.b.length} ولادات</span> ${m!=null?`<span class="tag">متوسطها ${m} شهر</span>`:''}</div><button class="mini" data-a="career" data-v="${esc(r.x.tag)}">المسيرة</button></div><small style="color:var(--mut)">${r.g.length?r.g.map(y=>y.mo).join(' ← ')+' شهر':'ولادة واحدة، تحتاج أخرى لحساب الفرق'}</small></div>`}).join('')||'<p class="empty">ما فيه ولادات مسجلة.<br>سجّل ولادة سابقة أو زر «تمت الولادة».</p>')};
+A.career=t=>{const B=birthsList(t),G=gapsOf(t),m=avgOf(G.map(y=>y.mo));openM(`<h3>📈 مسيرة ${esc(t)}</h3><p style="margin-bottom:8px">${B.length} ولادات | المتوسط: <b>${m==null?'-':m+' شهر'}</b>${B.length<5?`<br><small style="color:var(--mut)">باقي ${5-B.length} لاكتمال 5 ولادات</small>`:''}</p>`+tbl(B.map((x,i)=>({i:i+1,d:x.d,n:x.n||'-',g:i?G[i-1].mo+' شهر ('+G[i-1].days+' يوم)':'-'})),['i','d','n','g'],['#','التاريخ','المواليد','الفرق عن السابقة'])+`<div class="toolbar" style="margin-top:10px"><button class="btn" data-a="pastB">+ ولادة سابقة</button></div>`)};
+A.pastB=()=>{const F=ewes().map(x=>x.tag);if(!F.length)return toast('أضف شاة أنثى أولاً');form('تسجيل ولادة سابقة',[['tag','الشاة (اكتب رقمها للبحث)','search',F],['bd','تاريخ الولادة','date',T()],['n','عدد المواليد','select',['1','2','3','4']],['mc','عدد الذكور','select',['0','1','2','3','4']]],d=>{const s=D.sheep.find(x=>x.tag==d.tag),n=+d.n,mc=+d.mc,par=birthsList(d.tag).length+1;D.hist.push({id:uid(),tag:d.tag,sire:'',date:'',n:1,gap:'',res:'ولدت',past:1,par,litter:n,mc,fc:n-mc,bd:d.bd});if(s){s.births=Math.max(s.births||0,par);if(!s.lastBirth||d.bd>s.lastBirth)s.lastBirth=d.bd}re('سُجلت ولادة '+d.tag+' بتاريخ '+d.bd)},d=>{if(!F.includes(d.tag))return 'اختر رقم شاة موجودة';if(+d.mc>+d.n)return 'عدد الذكور أكبر من عدد المواليد';if(birthsList(d.tag).some(x=>x.d==d.bd))return 'هذي الولادة مسجلة من قبل'});};
 </script>
 </body>
