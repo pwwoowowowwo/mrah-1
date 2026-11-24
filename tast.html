@@ -436,6 +436,43 @@ linear-gradient(var(--soft),var(--soft)) 0 262px/31.5% 84px no-repeat,linear-gra
 linear-gradient(var(--soft),var(--soft)) 0 366px/100% 120px no-repeat}
 @keyframes skel{from{opacity:.4}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#view:empty::before{animation:none}}
+/* ===== Android compact sizing ===== */
+html{font-size:12px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+header{padding:calc(6px + env(safe-area-inset-top,0px)) 14px 10px!important;border-radius:0 0 24px 24px}
+.brand{font-size:1.5rem!important;gap:6px}
+#hsrch{width:124px;height:34px}#hsrch::after{font-size:.78rem}
+#theme{width:34px;height:34px;font-size:14px}
+.ib{width:34px;height:34px;font-size:15px}
+main{padding:12px 12px 104px}
+.hgreet{margin:12px auto 2px;padding:0 14px;font-size:1.25rem}
+.hgreet::before{height:30px}
+.hgreet::after{font-size:.78rem}
+.card,.kpi{border-radius:20px}
+.card{padding:12px;margin-bottom:10px}
+.card h3{font-size:1.05rem;padding-bottom:7px;margin-bottom:8px}
+.hero{grid-template-columns:1fr 88px;padding:12px 14px 24px;border-radius:22px;margin-bottom:10px}
+.hero h2{font-size:1rem}
+.hero p{font-size:.75rem}
+.hero .big{font-size:2.3rem}
+.hero svg{width:88px;height:88px}
+.hero .legend button{font-size:.68rem;padding:2px 8px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.kpi{padding:10px 12px}
+.kpi .num{font-size:1.4rem}
+.kpi small{font-size:.7rem}
+.btn{padding:10px 14px;font-size:.95rem;border-radius:14px}
+input,select{padding:9px 11px;border-radius:13px}
+.mi{width:40px;height:40px;font-size:1.2rem}
+.mrow{padding:9px;margin-bottom:7px;border-radius:16px}
+.task{padding:11px;font-size:.95rem}
+nav{inset-inline:8px;bottom:calc(6px + env(safe-area-inset-bottom,0px));border-radius:24px}
+nav button{padding:7px 0 8px;font-size:.62rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav button b{font-size:1.2rem}
+.nb{font-size:.6rem;min-width:15px;padding:0 4px}
+#fab{width:52px;height:52px;font-size:2rem;border-width:5px;bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+.sheet{padding:16px;border-radius:22px 22px 0 0}
+.sheet h3{font-size:1.1rem}
+#toast{bottom:70px}
 </style>
 </head>
 <body>
@@ -789,4 +826,3 @@ L('manifest',{href:URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'app
 })();
 </script>
 </body>
-</html>
