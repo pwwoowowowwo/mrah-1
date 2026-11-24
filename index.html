@@ -436,49 +436,6 @@ linear-gradient(var(--soft),var(--soft)) 0 262px/31.5% 84px no-repeat,linear-gra
 linear-gradient(var(--soft),var(--soft)) 0 366px/100% 120px no-repeat}
 @keyframes skel{from{opacity:.4}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){#view:empty::before{animation:none}}
-/* ===== Android compact sizing ===== */
-html{font-size:clamp(9px,calc(100vw/33),13px);-webkit-text-size-adjust:none;text-size-adjust:none}
-header{padding:calc(0.5rem + env(safe-area-inset-top,0rem)) 1.17rem 0.833rem!important;border-radius:0 0 2rem 2rem}
-.brand{font-size:1.5rem!important;gap:0.5rem}
-#hsrch{width:10.3rem;height:2.83rem}#hsrch::after{font-size:.78rem}
-#theme{width:2.83rem;height:2.83rem;font-size:1.17rem}
-.ib{width:2.83rem;height:2.83rem;font-size:1.25rem}
-main{padding:1rem 1rem 8.67rem}
-.hgreet{margin:1rem auto 0.167rem;padding:0 1.17rem;font-size:1.25rem}
-.hgreet::before{height:2.5rem}
-.hgreet::after{font-size:.78rem}
-.card,.kpi{border-radius:1.67rem}
-.card{padding:1rem;margin-bottom:0.833rem}
-.card h3{font-size:1.05rem;padding-bottom:0.583rem;margin-bottom:0.667rem}
-.hero{grid-template-columns:1fr 7.33rem;padding:1rem 1.17rem 2rem;border-radius:1.83rem;margin-bottom:0.833rem}
-.hero h2{font-size:1rem}
-.hero p{font-size:.75rem}
-.hero .big{font-size:2.3rem}
-.hero svg{width:7.33rem;height:7.33rem}
-.hero .legend button{font-size:.68rem;padding:0.167rem 0.667rem}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(9.17rem,1fr));gap:0.667rem}
-.kpi{padding:0.833rem 1rem}
-.kpi .num{font-size:1.4rem}
-.kpi small{font-size:.7rem}
-.btn{padding:0.833rem 1.17rem;font-size:.95rem;border-radius:1.17rem}
-input,select{padding:0.75rem 0.917rem;border-radius:1.08rem}
-.mi{width:3.33rem;height:3.33rem;font-size:1.2rem}
-.mrow{padding:0.75rem;margin-bottom:0.583rem;border-radius:1.33rem}
-.task{padding:0.917rem;font-size:.95rem}
-nav{inset-inline:0.667rem;bottom:calc(0.5rem + env(safe-area-inset-bottom,0rem));border-radius:2rem}
-nav button{padding:0.583rem 0 0.667rem;font-size:.62rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-nav button b{font-size:1.2rem}
-.nb{font-size:.6rem;min-width:1.25rem;padding:0 0.333rem}
-#fab{width:4.33rem;height:4.33rem;font-size:2rem;border-width:0.417rem;bottom:calc(2.33rem + env(safe-area-inset-bottom,0rem))}
-.sheet{padding:1.33rem;border-radius:1.83rem 1.83rem 0 0}
-.sheet h3{font-size:1.1rem}
-#toast{bottom:5.83rem}
-
-/* fluid: scale everything with screen width */
-.hero svg{width:7.3rem;height:7.3rem}
-.hero{grid-template-columns:1fr 7.3rem}
-@media(max-width:340px){.kpis{grid-template-columns:repeat(2,1fr)}.hgreet{font-size:1.1rem}}
-@media(min-width:600px){html{font-size:13px}main{max-width:720px}}
 </style>
 </head>
 <body>
@@ -855,3 +812,4 @@ return `<div class="toolbar"><button class="btn" data-a="pastB">+ تسجيل و�
 A.career=t=>{const B=birthsList(t),G=gapsOf(t),m=avgOf(G.map(y=>y.mo));openM(`<h3>📈 مسيرة ${esc(t)}</h3><p style="margin-bottom:8px">${B.length} ولادات | المتوسط: <b>${m==null?'-':m+' شهر'}</b>${B.length<5?`<br><small style="color:var(--mut)">باقي ${5-B.length} لاكتمال 5 ولادات</small>`:''}</p>`+tbl(B.map((x,i)=>({i:i+1,d:x.d,n:x.n||'-',g:i?G[i-1].mo+' شهر ('+G[i-1].days+' يوم)':'-'})),['i','d','n','g'],['#','التاريخ','المواليد','الفرق عن السابقة'])+`<div class="toolbar" style="margin-top:10px"><button class="btn" data-a="pastB">+ ولادة سابقة</button></div>`)};
 A.pastB=()=>{const F=ewes().map(x=>x.tag);if(!F.length)return toast('أضف شاة أنثى أولاً');form('تسجيل ولادة سابقة',[['tag','الشاة (اكتب رقمها للبحث)','search',F],['bd','تاريخ الولادة','date',T()],['n','عدد المواليد','select',['1','2','3','4']],['mc','عدد الذكور','select',['0','1','2','3','4']]],d=>{const s=D.sheep.find(x=>x.tag==d.tag),n=+d.n,mc=+d.mc,par=birthsList(d.tag).length+1;D.hist.push({id:uid(),tag:d.tag,sire:'',date:'',n:1,gap:'',res:'ولدت',past:1,par,litter:n,mc,fc:n-mc,bd:d.bd});if(s){s.births=Math.max(s.births||0,par);if(!s.lastBirth||d.bd>s.lastBirth)s.lastBirth=d.bd}re('سُجلت ولادة '+d.tag+' بتاريخ '+d.bd)},d=>{if(!F.includes(d.tag))return 'اختر رقم شاة موجودة';if(+d.mc>+d.n)return 'عدد الذكور أكبر من عدد المواليد';if(birthsList(d.tag).some(x=>x.d==d.bd))return 'هذي الولادة مسجلة من قبل'});};
 </script>
+</body>
